@@ -870,6 +870,150 @@ VALUES
 ('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, NULL); 
 Select * from Message
 
+--17. ItemPhoto
+INSERT INTO ItemPhoto (ItemID, Photo)
+VALUES
+--	Photos for Message 1
+('MSG00001', 'Photo 1'),
+('MSG00001', 'Photo 2'),
+('MSG00001', 'Photo 3'),
+--	Photos for Message 2
+('MSG00002', 'Photo 1'),
+('MSG00002', 'Photo 2'),
+('MSG00002', 'Photo 3'),
+--	Photos for Message 3
+('MSG00003', 'Photo 1'),
+('MSG00003', 'Photo 2'),
+('MSG00003', 'Photo 3'),
+--	Photos for Message 4
+('MSG00004', 'Photo 1'),
+('MSG00004', 'Photo 2'),
+('MSG00004', 'Photo 3'),
+--	Photos for Message 5
+('MSG00005', 'Photo 1'),
+('MSG00005', 'Photo 2'),
+('MSG00005', 'Photo 3'),
+--	Photos for Message 6
+('MSG00006', 'Photo 1'),
+('MSG00006', 'Photo 2'),
+('MSG00006', 'Photo 3'),
+--	Photos for Message 7
+('MSG00007', 'Photo 1'),
+('MSG00007', 'Photo 2'),
+('MSG00007', 'Photo 3'),
+--	Photos for Message 8
+('MSG00008', 'Photo 1'),
+('MSG00008', 'Photo 2'),
+('MSG00008', 'Photo 3'),
+--	Photos for Message 9
+('MSG00009', 'Photo 1'),
+('MSG00009', 'Photo 2'),
+('MSG00009', 'Photo 3'),
+--	Photos for Message 10
+('MSG00010', 'Photo 1'),
+('MSG00010', 'Photo 2'),
+('MSG00010', 'Photo 3')
+select * from ItemPhoto
+
+--19. Likes
+INSERT INTO Likes (AccID, MessageID)
+VALUES
+(1, 'MSG00001'),
+(4, 'MSG00002'),
+(7, 'MSG00002'),
+(9, 'MSG00003'),
+(11, 'MSG00006'),
+(14, 'MSG00006'),
+(20, 'MSG00007'),
+(20, 'MSG00007'),
+(23, 'MSG00008'),
+(28, 'MSG00009'),
+(29, 'MSG00009'),
+(30, 'MSG000010'),
+(30, 'MSG000010')
+select * from Likes
+
+drop table Tenant
+--20. Tenant
+INSERT INTO Tenant (TenantID, ContactStartDate, ContactEndDate, VerifiedBy)
+VALUES
+(1, '2023-1-10', '2027-3-10', 32),
+(2, '2023-2-10', '2027-2-10', 33),
+(3, '2023-3-10', '2027-1-10', 34),
+(4, '2023-4-10', '2026-12-10', null),
+(5, '2023-5-10', '2026-11-10', 36),
+(6, '2023-6-10', '2026-10-10', 37),
+(7, '2023-7-10', '2026-9-10', 37),
+(8, '2023-8-10', '2026-8-10', null),
+(9, '2023-9-10', '2026-7-10', 37),
+(10, '2023-10-10', '2026-6-10', null),
+(11, '2023-11-10', '2026-5-10', 38),
+(12, '2023-12-10', '2026-4-10', 38),
+(13, '2024-1-10', '2026-3-10', 39),
+(14, '2024-2-10', '2026-2-10', 40),
+(15, '2023-3-10', '2026-1-10', 41)
+select * from Tenant
+
+--21. UsefulContact
+INSERT INTO UsefulContact (UsefulCtcID, UsefulCtcName, UsefulCtcDesc, UsefulCtcPhone, CtcCatId)
+VALUES
+('UC0001',	'Guan Quan',	'','12345678',	'CC001'),
+('UC0002',	'Sairam',		'', '23456789',	'CC002'),
+('UC0003',	'Kesh',			'', '34567890',	'CC003'),
+('UC0004',	'Zhi Zun',		'', '45678901',	'CC004'),
+('UC0005',	'Lavan',		'', '56789012',	'CC005'),
+('UC0006',	'Allah',		'', '67890123',	'CC006'),
+('UC0007',	'Akbah',		'', '78901234',	'CC001'),
+('UC0008',	'Tim',			'', '89012345',	'CC002'),
+('UC0009',	'Robert',		'', '90123456',	'CC003'),
+('UC00010',	'Sam',			'', '01234567',	'CC004'),
+('UC00011',	'Tom',			'', '24680246',	'CC005'),
+('UC00012',	'Jayden',		'', '35791357', 'CC006'),
+('UC00013',	'Bryan',		'', '46802468', 'CC001'),
+('UC00014',	'Brian',		'', '57913579',	'CC002'),
+('UC00015',	'Charmaine',	'', '68024680',	'CC003'),
+('UC00016',	'Annabelle',	'', '79135791',	'CC004'),
+('UC00017',	'Chee Bai',		'', '80246802',	'CC005'),
+('UC00018',	'Elizabeth',	'', '02468024',	'CC006'),
+('UC00019',	'Zhi En',		'', '12344321',	'CC001'),
+('UC00020',	'Zack',			'','56788765',	'CC002')
+select * from UsefulContact
+
+--22. CondoUseFulContact
+INSERT INTO CondoUsefulContact (CondoId, UsefulCtcID)
+VALUES
+('C001', 'UC0001'),
+('C002', 'UC0002'),
+('C003', 'UC0003'),
+('C004', 'UC0004'),
+('C005', 'UC0005'),
+('C006', 'UC0006'),
+('C007', 'UC0007'),
+('C008', 'UC0008'),
+('C009', 'UC0009'),
+('C010', 'UC00010'),
+('C011', 'UC00011'),
+('C012', 'UC00012'),
+('C013', 'UC00013'),
+('C014', 'UC00014'),
+('C015', 'UC00015'),
+('C001', 'UC00016'),
+('C002', 'UC00017'),
+('C003', 'UC00018'),
+('C004', 'UC00019'),
+('C005', 'UC00020')
+select * from CondoUsefulContact
+
+--23. VehicleLabel
+INSERT INTO VehicleLabel (VehLblAppID, VehLblStatus, VehLblNum, VehicleNo, AppliedBy, IssuedBy)
+VALUES
+()
+
+--24. TempVehLabel
+INSERT INTO TempVehLabel (VehLblAppID, TempStartDate, TempExpiryDate)
+VALUES
+()
+
 /* Tables without foreign key 
 1.	Condo
 2.	ContactCat
@@ -892,7 +1036,7 @@ Table with foreign key
 17.	ItemPhoto
 18.	ItemRelated
 19.	Likes
-20.	Tenent
+20.	Tenant
 21.	UsefulContact
 22.	CondoUsefulContact
 23.	VehicleLabel
