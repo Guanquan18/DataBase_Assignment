@@ -442,50 +442,50 @@ create table TempVehLabel
 
 	
 --7.Account
-	Insert into Account (AccID,AccName, AccAddress, AccCtcNo, AccEmail, CondoID, ApprovedBy)
+	Insert into Account (AccName, AccAddress, AccCtcNo, AccEmail, CondoID, ApprovedBy)
 	values
 	-- lAST 10 are CondoMgr
-	(1,'John Tan', 'Blk 3, 8 Marina Boulevard, #05-118', '87345678', 'john.tan@gmail.com', 'C001', 1),
-	(2,'Steve Smith', 'Blk 4, 8 Marina Boulevard, #06-128', '88654321', 'steve.smith@gmail.com', 'C001', 2),
-	(3,'Virat Kohli', 'Blk 2, 8 Marina Boulevard, #04-108', '86781234', 'virat.kohli@gmail.com', 'C001', 2),
-	(4,'Dwayne Johnson', 'Blk 3, 8 Marina Boulevard, #05-115', '81218765', 'dwayne.johnson@gmail.com', 'C001', 1),
-	(5,'Taylor Swift', 'Blk 6, 8 Marina Boulevard, #03-101', '98765432', 'taylor.swift@gmail.com', 'C001', 1),
-	(6,'Lious Teo', 'Blk 5, 8 Marina Boulevard, #06-130', '80321678', 'lious.teo@gmail.com', 'C001', 3),
-	(7,'Ethan Lim', 'Blk 2, 8 Marina Boulevard, #07-131', '87654321', 'ethan.lim@gmail.com', 'C001', 4),
-	(8,'Selana Gomez', 'Blk 1, 8 Marina Boulevard, #04-110', '83567890', 'selana.gomez@gmail.com', 'C001', 4),
-	(9,'Harry Maguire', 'Blk 7, 8 Marina Boulevard, #07-135', '85432123', 'harry.maguire@gmail.com', 'C001', 5),
-	(10,'Rachel Tan', 'Blk 1, 1 King Albert Park, #05-118', '82358765', 'rachel.tan@gmail.com', 'C002', 6),
-	(11,'Alan Walker', 'Blk 1, 1 King Albert Park, #05-120', '87651234', 'alan.walker@gmail.com', 'C002', 6),
-	(12,'Annabelle Chua', 'Blk 2, 1 King Albert Park, #06-128', '84561234', 'annabelle.chua@gmail.com', 'C002', 7),
-	(13,'Sophia', 'Blk 2, 1 King Albert Park, #06-138', '86782341', 'sophia@gmail.com', 'C002', 7),
-	(14,'Chairmaine', 'Blk 3, 1 King Albert Park, #04-115', '87891234', 'chairmaine@gmail.com', 'C002', 8),
-	(15,'Bryan Lim', 'Blk 4, 1 King Albert Park, #03-108', '87892234', 'bryan.lim@gmail.com', 'C002', 8),
-	(16,'Enzo Tan', 'Blk 4, 1 King Albert Park, #03-105', '81234567', 'enzo.tan@gmail.com', 'C002', 10),
-	(17,'Fu Zheng Yi', 'Blk 5, 1 King Albert Park, #07-135', '82345678', 'fu.zhengyi@gmail.com', 'C002', 10),
-	(18,'Kevin De Bruyne', 'Blk 5, 1 King Albert Park, #07-138', '83456789', 'kevin.debruyne@gmail.com', 'C002', 9),
-	(19,'Tom Holland', 'Blk 1, 1 Lorong 20 Geylang, #05-118', '84567890', 'tom.holland@gmail.com', 'C003', 11),
-	(20,'Bruno Mars', 'Blk 1, 50 - 76 Punggol Walk, #05-120', '87890123', 'bruno.mars@gmail.com', 'C004', 5),
-	(21,'Fandi Ahmed', 'Blk 2, 7 Bishan Street 15, #05-118', '88901234', 'fandi.ahmed@gmail.com', 'C005', 6),
-	(22,'Iqball', 'Blk 3, 8 Kitchener Link, #06-133', '82134567', 'iqball@gmail.com', 'C006', 12),
-	(23,'Elysaa', 'Blk 7, 116-122 Serangoon Aveneue 3, #02-100', '83245678', 'elysaa@gmail.com', 'C007', 9),
-	(24,'Keefe Chua', 'Blk 5, 21 McCallum Street, #05-120', '81224567', 'keefe.chua@gmail.com', 'C008', 8),
-    (25,'Eugene', 'Blk 5, Hougnag Avenue 6, #05-118', '83456889', 'eugene@gmail.com', 'C009', 13),
-    (26,'Marcus', 'Blk 2, 28 Beach Road, #06-128', '85678902', 'marcus@gmail.com', 'C010', 15),
-    (27,'Marcellus', 'Blk 3, 11-23 Sengkang Eaat Avenue, #03-103', '86789112', 'marcellus@gmail.com', 'C011', 7),
-    (28,'Melson', 'Blk 9A, 9A - 23D Bartley Road, #04-110', '87891123', 'melson@gmail.com', 'C012', 10),
-    (29,'Nicholas', 'Blk 4, 2 - 6B Simon Lane, #02-100', '88901254', 'nicholas@gmail.com', 'C013', 12),
-    (30,'Luis', 'Blk 2, 5 Anthony Road, #03-115', '89812345', 'luis@gmail.com', 'C014', 11),
-    (31,'Edric', 'Blk 5, 180 Depot Road, #06-130', '81023356', 'edric@gmail.com', 'C015', 8),
-	(32,'HorizonBloom', 'King Albert Park 1', '87624321', 'horizonbloom@example.com','C001',9),
-	(33,'SunRiseTech', 'Raffles Quay 45', '91234597', 'sunrise.tech@example.com','C002',3),
-	(34,'ClearView Innovations', 'Bukit Timah Road 22', '82345671', 'clearview.innov@example.com','C003',2),
-	(35,'StarLink Co.', 'Clarke Quay 78', '98165432', 'starlink@example.com','C004',12),
-	(36,'SkyGrove Enterprises', 'Marina Bay Sands 15', '87154321', 'skygrove.ent@example.com','C005',13),
-	(37,'SeaScape Solutions', 'East Coast Road 50', '82456789', 'seascape.sol@example.com','C006',11),
-	(38,'FreshHarbor Ventures', 'Jurong West Street 18', '89012345', 'fresh.harbor@example.com','C007',5),
-	(39,'BlueWave Industries', 'Yishun Avenue 2', '89654321', 'bluewave.ind@example.com','C008',8),
-	(40,'PurePulse Technologies', 'Serangoon Central 31', '91234567', 'purepulse.tech@example.com','C009',9),
-	(41,'EchoView Industries', 'Chinatown Point 40', '98865432', 'echoview@example.com','C010',6);
+	('John Tan', 'Blk 3, 8 Marina Boulevard, #05-118', '87345678', 'john.tan@gmail.com', 'C001', 1),
+	('Steve Smith', 'Blk 4, 8 Marina Boulevard, #06-128', '88654321', 'steve.smith@gmail.com', 'C001', 2),
+	('Virat Kohli', 'Blk 2, 8 Marina Boulevard, #04-108', '86781234', 'virat.kohli@gmail.com', 'C001', 2),
+	('Dwayne Johnson', 'Blk 3, 8 Marina Boulevard, #05-115', '81218765', 'dwayne.johnson@gmail.com', 'C001', 1),
+	('Taylor Swift', 'Blk 6, 8 Marina Boulevard, #03-101', '98765432', 'taylor.swift@gmail.com', 'C001', 1),
+	('Lious Teo', 'Blk 5, 8 Marina Boulevard, #06-130', '80321678', 'lious.teo@gmail.com', 'C001', 3),
+	('Ethan Lim', 'Blk 2, 8 Marina Boulevard, #07-131', '87654321', 'ethan.lim@gmail.com', 'C001', 4),
+	('Selana Gomez', 'Blk 1, 8 Marina Boulevard, #04-110', '83567890', 'selana.gomez@gmail.com', 'C001', 4),
+	('Harry Maguire', 'Blk 7, 8 Marina Boulevard, #07-135', '85432123', 'harry.maguire@gmail.com', 'C001', 5),
+	('Rachel Tan', 'Blk 1, 1 King Albert Park, #05-118', '82358765', 'rachel.tan@gmail.com', 'C002', 6),
+	('Alan Walker', 'Blk 1, 1 King Albert Park, #05-120', '87651234', 'alan.walker@gmail.com', 'C002', 6),
+	('Annabelle Chua', 'Blk 2, 1 King Albert Park, #06-128', '84561234', 'annabelle.chua@gmail.com', 'C002', 7),
+	('Sophia', 'Blk 2, 1 King Albert Park, #06-138', '86782341', 'sophia@gmail.com', 'C002', 7),
+	('Chairmaine', 'Blk 3, 1 King Albert Park, #04-115', '87891234', 'chairmaine@gmail.com', 'C002', 8),
+	('Bryan Lim', 'Blk 4, 1 King Albert Park, #03-108', '87892234', 'bryan.lim@gmail.com', 'C002', 8),
+	('Enzo Tan', 'Blk 4, 1 King Albert Park, #03-105', '81234567', 'enzo.tan@gmail.com', 'C002', 10),
+	('Fu Zheng Yi', 'Blk 5, 1 King Albert Park, #07-135', '82345678', 'fu.zhengyi@gmail.com', 'C002', 10),
+	('Kevin De Bruyne', 'Blk 5, 1 King Albert Park, #07-138', '83456789', 'kevin.debruyne@gmail.com', 'C002', 9),
+	('Tom Holland', 'Blk 1, 1 Lorong 20 Geylang, #05-118', '84567890', 'tom.holland@gmail.com', 'C003', 11),
+	('Bruno Mars', 'Blk 1, 50 - 76 Punggol Walk, #05-120', '87890123', 'bruno.mars@gmail.com', 'C004', 5),
+	('Fandi Ahmed', 'Blk 2, 7 Bishan Street 15, #05-118', '88901234', 'fandi.ahmed@gmail.com', 'C005', 6),
+	('Iqball', 'Blk 3, 8 Kitchener Link, #06-133', '82134567', 'iqball@gmail.com', 'C006', 12),
+	('Elysaa', 'Blk 7, 116-122 Serangoon Aveneue 3, #02-100', '83245678', 'elysaa@gmail.com', 'C007', 9),
+	('Keefe Chua', 'Blk 5, 21 McCallum Street, #05-120', '81224567', 'keefe.chua@gmail.com', 'C008', 8),
+    ('Eugene', 'Blk 5, Hougnag Avenue 6, #05-118', '83456889', 'eugene@gmail.com', 'C009', 13),
+    ('Marcus', 'Blk 2, 28 Beach Road, #06-128', '85678902', 'marcus@gmail.com', 'C010', 15),
+    ('Marcellus', 'Blk 3, 11-23 Sengkang Eaat Avenue, #03-103', '86789112', 'marcellus@gmail.com', 'C011', 7),
+    ('Melson', 'Blk 9A, 9A - 23D Bartley Road, #04-110', '87891123', 'melson@gmail.com', 'C012', 10),
+    ('Nicholas', 'Blk 4, 2 - 6B Simon Lane, #02-100', '88901254', 'nicholas@gmail.com', 'C013', 12),
+    ('Luis', 'Blk 2, 5 Anthony Road, #03-115', '89812345', 'luis@gmail.com', 'C014', 11),
+    ('Edric', 'Blk 5, 180 Depot Road, #06-130', '81023356', 'edric@gmail.com', 'C015', 8),
+	('HorizonBloom', 'King Albert Park 1', '87624321', 'horizonbloom@example.com','C001',9),
+	('SunRiseTech', 'Raffles Quay 45', '91234597', 'sunrise.tech@example.com','C002',3),
+	('ClearView Innovations', 'Bukit Timah Road 22', '82345671', 'clearview.innov@example.com','C003',2),
+	('StarLink Co.', 'Clarke Quay 78', '98165432', 'starlink@example.com','C004',12),
+	('SkyGrove Enterprises', 'Marina Bay Sands 15', '87154321', 'skygrove.ent@example.com','C005',13),
+	('SeaScape Solutions', 'East Coast Road 50', '82456789', 'seascape.sol@example.com','C006',11),
+	('FreshHarbor Ventures', 'Jurong West Street 18', '89012345', 'fresh.harbor@example.com','C007',5),
+	('BlueWave Industries', 'Yishun Avenue 2', '89654321', 'bluewave.ind@example.com','C008',8),
+	('PurePulse Technologies', 'Serangoon Central 31', '91234567', 'purepulse.tech@example.com','C009',9),
+	('EchoView Industries', 'Chinatown Point 40', '98865432', 'echoview@example.com','C010',6);
 	SELECT * FROM Account;
 
 --8.CondoMgmt
@@ -506,21 +506,21 @@ create table TempVehLabel
 --9.Owner
 	Insert Into Owner (OwnerID, OwnStartDate, CheckedBy)
 	Values
-	(2, '2022-01-01', 1),
-	(4, '2022-02-15', 2),
-	(6, '2022-03-10', 3),
-	(8, '2022-04-22', 5),
-	(10, '2022-05-05', 9),
-	(12, '2022-06-18', 6),
-	(14, '2022-07-02', 7),
-	(16, '2022-08-14', 6),
-	(18, '2022-09-28', 9),
-	(20, '2022-10-11', 10),
-	(22, '2022-11-24', 15),
-	(24, '2022-12-07', 12),
-	(26, '2023-01-20', 7),
-	(28, '2023-02-03', 3),
-	(30, '2023-03-17', 12);
+	(2, '2022-01-01', 32),
+	(4, '2022-02-15', 32),
+	(6, '2022-03-10', 33),
+	(8, '2022-04-22', null),
+	(10, '2022-05-05', 35),
+	(12, '2022-06-18', 36),
+	(14, '2022-07-02', 36),
+	(16, '2022-08-14', 36),
+	(18, '2022-09-28', null),
+	(20, '2022-10-11', 38),
+	(22, '2022-11-24', 39),
+	(24, '2022-12-07', 39),
+	(26, '2023-01-20', 40),
+	(28, '2023-02-03', 41),
+	(30, '2023-03-17', null);
 	Select * from Owner;
 
 --10.Announcement
@@ -843,16 +843,16 @@ Select * from Booking;
 --15. Feedback
 INSERT INTO Feedback (FbkID, FbkDesc, FbkDateTime, FbkStatus, ByAccID, FbkCatID, CondoMgmID)
 VALUES
-('FBK001', 'The hallway on the 3rd floor is not properly cleaned.', '2024-03-01 10:00:00', 'S', 5, 'FC001', 31),
-('FBK002', 'The security gate is malfunctioning frequently.', '2024-03-02 15:30:00', 'P', 12, 'FC002', 32),
-('FBK003', 'Leaky faucet in the community gym restroom.', '2024-03-03 09:00:00', 'S', 7, 'FC003', NULL),
-('FBK004', 'Cracks observed on the sidewall of building B.', '2024-03-04 14:20:00', 'P', 15, 'FC004', 33),
-('FBK005', 'Parking lot line markings are faded and need repainting.', '2024-03-05 13:00:00', 'S', 20, 'FC005', NULL),
-('FBK006', 'Loud music from apartment 5B during late-night hours.', '2024-03-06 22:00:00', 'P', 9, 'FC006', 34),
-('FBK007', 'Broken equipment in the fitness center.', '2024-03-07 16:45:00', 'S', 18, 'FC007', 35),
-('FBK008', 'Littering around the community playground.', '2024-03-08 11:30:00', 'P', 22, 'FC001', NULL),
-('FBK009', 'Elevator doors closing too quickly, posing a safety hazard.', '2024-03-09 17:15:00', 'S', 25, 'FC008', 36),
-('FBK010', 'Inadequate lighting in the rear parking area.', '2024-03-10 20:50:00', 'P', 30, 'FC005', 37);
+('FBK001', 'The hallway on the 3rd floor is not properly cleaned.', '2023-03-01 10:00:00', 'S', 5, 'FC001', 32),
+('FBK002', 'The security gate is malfunctioning frequently.', '2023-03-02 15:30:00', 'P', 12, 'FC002', 32),
+('FBK003', 'Leaky faucet in the community gym restroom.', '2023-03-03 09:00:00', 'S', 7, 'FC003', NULL),
+('FBK004', 'Cracks observed on the sidewall of building B.', '2023-03-04 14:20:00', 'P', 15, 'FC004', 33),
+('FBK005', 'Parking lot line markings are faded and need repainting.', '2023-03-05 13:00:00', 'S', 20, 'FC005', NULL),
+('FBK006', 'Loud music from apartment 5B during late-night hours.', '2023-03-06 22:00:00', 'P', 9, 'FC006', 34),
+('FBK007', 'Broken equipment in the fitness center.', '2023-03-07 16:45:00', 'S', 18, 'FC007', 35),
+('FBK008', 'Littering around the community playground.', '2023-03-08 11:30:00', 'P', 22, 'FC001', NULL),
+('FBK009', 'Elevator doors closing too quickly, posing a safety hazard.', '2023-03-09 17:15:00', 'S', 25, 'FC008', 36),
+('FBK010', 'Inadequate lighting in the rear parking area.', '2023-03-10 20:50:00', 'P', 30, 'FC005', 37);
 Select * from Feedback
 
 --16. Message
