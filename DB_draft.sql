@@ -5,7 +5,6 @@ USE db_Assignment_my_own;
 
 --1. (Table 5)
 create table Condo
-
 (
 	CondoID			char(10)		not null,
 	CondoName		varchar(50)		not null,
@@ -110,7 +109,7 @@ create table Owner
 	constraint FK_Owner_OwnerID foreign key (OwnerID)
 		references Account (AccID),
 	constraint FK_Owner_CheckedBy foreign key (CheckedBy)
-		references Account (AccID),
+		references CondoMgmt (CondoMgmtID),
 	
 )
 
@@ -125,7 +124,7 @@ create table Announcement
 
 	constraint PK_Annoucement primary key (AnnID),
 	constraint FK_Annoucement_CondoMgmID foreign key (CondoMgmID)
-		references Account (AccID),
+		references CondoMgmt (CondoMgmtID),
 	constraint CK_Announcement_AnnEndDate check(AnnStartDate<=AnnEndDate), 
 )
 
@@ -142,7 +141,34 @@ create table Facility
 		references Condo (CondoID)
 )
 
---12. (Table 3)
+
+
+--12. (Table 10)
+create table FacTimeSlot
+(
+	FacID		char(10)		not null,
+	TimeSlotSN	tinyint			not null,
+	SlotDesc	varchar(100)	not null,
+
+	constraint PK_FacTimeSlot primary key (FacID,TimeSlotSN),
+	constraint FK_FacTimeSlot_FacID	foreign key (FacID)
+		references Facility (FacID)
+)
+
+--13. (Table 4)
+create table BookSlot
+(
+	FacID		char(10)	not null,
+	TimeSlotSN	tinyint		not null,
+	SlotDate	date		not null,
+	SlotStatus	char(1)		not null	check(SlotStatus in ('A','B','M')),
+
+	constraint PK_BookSlot primary key (FacID,TimeSlotSN,SlotDate),
+	constraint FK_BookSlot_FacID_TimeSlotSN foreign key (FacID,TimeSlotSN)
+		references FacTimeSlot (FacID,TimeSlotSN)
+
+)
+--14. (Table 3)
 create table Booking
 (
 	BookingID		char(10)	not null,
@@ -156,34 +182,8 @@ create table Booking
 	constraint PK_Booking primary key (BookingID),
 	constraint FK_Booking_AccID foreign key (AccID)
 		references Account (AccID),
-	constraint FK_Booking_FacID foreign key (FacID)
-		references Facility (FacID)
-)
-
---13. (Table 10)
-create table FacTimeSlot
-(
-	FacID		char(10)		not null,
-	TimeSlotSN	tinyint			not null,
-	SlotDesc	varchar(100)	not null,
-
-	constraint PK_FacTimeSlot primary key (FacID,TimeSlotSN),
-	constraint FK_FacTimeSlot_FacID	foreign key (FacID)
-		references Facility (FacID)
-)
-
---14. (Table 4)
-create table BookSlot
-(
-	FacID		char(10)	not null,
-	TimeSlotSN	tinyint		not null,
-	SlotDate	datetime	not null,
-	SlotStatus	char(1)		not null	check(SlotStatus in ('A','B','M')),
-
-	constraint PK_BookSlot primary key (FacID,TimeSlotSN),
-	constraint FK_BookSlot_FacID_TimeSlotSN foreign key (FacID,TimeSlotSN)
-		references FacTimeSlot (FacID,TimeSlotSN)
-
+	constraint FK_Booking_FacID_TimeSlotSn_SlotDate foreign key (FacID,TimeSlotSN,SlotDate)
+		references BookSlot (FacID,TimeSlotSN,SlotDate)
 )
 
 --15. (Table 11)
@@ -191,7 +191,7 @@ create table Feedback
 (
 	FbkID		char(10)	not null,
 	FbkDesc		text		not null,
-	FbkDateTime	datetime	not null	default(getdate())	check(FbkDateTime <= getdate()),
+	FbkDateTime	datetime	not null	default(getdate()),
 	FbkStatus	char(1)		not null	check(FbkStatus in ('S','P','A')),
 	ByAccID		smallint	not null,
 	FbkCatID	char(10)	not null,
@@ -203,7 +203,8 @@ create table Feedback
 	constraint FK_Feedback_FbkCatID foreign key (FbkCatId)
 		references FeedbkCat (FbkCatID),
 	constraint FK_Feedback_CondoMgmID foreign key (CondoMgmID)
-		references Account (AccID),
+		references CondoMgmt (CondoMgmtID),
+	constraint CK_Feedback_FbkDateTime check(FbkDateTime <= getdate())
 
 )
 
@@ -229,7 +230,7 @@ create table ItemPhoto
 	ItemID	char(10)	not null,
 	Photo	varchar(20)	not null,
 	
-	constraint PK_ItemPhoto primary key (ItemID),
+	constraint PK_ItemPhoto primary key (ItemID,Photo),
 	constraint FK_ItemPhoto_ItemID foreign key (ItemID)
 		references Message (MsgID)
 )
@@ -264,7 +265,7 @@ create table Likes
 		references Message (MsgID)
 )
 
---20. (Table )
+--20. (Table 21)
 
 create table  Tenant
 (
@@ -277,11 +278,11 @@ create table  Tenant
 	constraint FK_Tenant_TenantID foreign key (TenantID)
 		references Account(AccID),
 	constraint FK_Tenant_VerifiedBy foreign key (VerifiedBy)
-		references Account (AccID),
+		references CondoMgmt (CondoMgmtID),
 	constraint CK_Tenant_ContactEndDate check(ContactStartDate <= ContactEndDate),
 )
 
---21. (Table )
+--21. (Table 22)
 create table UsefulContact
 (
 	UsefulCtcID		char(10)		not null,
@@ -295,7 +296,7 @@ create table UsefulContact
 		references ContactCat (CtcCatID)
 )
 
---22. (Table )
+--22. (Table 7)
 create table CondoUsefulContact
 (
 	CondoID		char(10)	not null,
@@ -308,7 +309,7 @@ create table CondoUsefulContact
 		references UsefulContact (UsefulCtcID),
 )
 
---23. (Table )
+--23. (Table 24)
 create table VehicleLabel 
 (
 	VehLblAppID		char(10)	not null,
@@ -324,10 +325,10 @@ create table VehicleLabel
 	constraint FK_AppliedBy foreign key (AppliedBy)
 		references Account (AccID),
 	constraint FK_IssuedBy foreign key (IssuedBy)
-		references Account (AccID),
+		references CondoMgmt (CondomgmtID),
 )
 
---24. (Table )
+--24. (Table 20)
 create table TempVehLabel
 (
 	VehLblAppID		char(10)	not null,
@@ -441,50 +442,50 @@ create table TempVehLabel
 
 	
 --7.Account
-	Insert into Account (AccName, AccAddress, AccCtcNo, AccEmail, CondoID, ApprovedBy)
+	Insert into Account (AccID,AccName, AccAddress, AccCtcNo, AccEmail, CondoID, ApprovedBy)
 	values
 	-- lAST 10 are CondoMgr
-	('John Tan', 'Blk 3, 8 Marina Boulevard, #05-118', '87345678', 'john.tan@gmail.com', 'C001', 1),
-	('Steve Smith', 'Blk 4, 8 Marina Boulevard, #06-128', '88654321', 'steve.smith@gmail.com', 'C001', 2),
-	('Virat Kohli', 'Blk 2, 8 Marina Boulevard, #04-108', '86781234', 'virat.kohli@gmail.com', 'C001', 2),
-	('Dwayne Johnson', 'Blk 3, 8 Marina Boulevard, #05-115', '81218765', 'dwayne.johnson@gmail.com', 'C001', 1),
-	('Taylor Swift', 'Blk 6, 8 Marina Boulevard, #03-101', '98765432', 'taylor.swift@gmail.com', 'C001', 1),
-	('Lious Teo', 'Blk 5, 8 Marina Boulevard, #06-130', '80321678', 'lious.teo@gmail.com', 'C001', 3),
-	('Ethan Lim', 'Blk 2, 8 Marina Boulevard, #07-131', '87654321', 'ethan.lim@gmail.com', 'C001', 4),
-	('Selana Gomez', 'Blk 1, 8 Marina Boulevard, #04-110', '83567890', 'selana.gomez@gmail.com', 'C001', 4),
-	('Harry Maguire', 'Blk 7, 8 Marina Boulevard, #07-135', '85432123', 'harry.maguire@gmail.com', 'C001', 5),
-	('Rachel Tan', 'Blk 1, 1 King Albert Park, #05-118', '82358765', 'rachel.tan@gmail.com', 'C002', 6),
-	('Alan Walker', 'Blk 1, 1 King Albert Park, #05-120', '87651234', 'alan.walker@gmail.com', 'C002', 6),
-	('Annabelle Chua', 'Blk 2, 1 King Albert Park, #06-128', '84561234', 'annabelle.chua@gmail.com', 'C002', 7),
-	('Sophia', 'Blk 2, 1 King Albert Park, #06-138', '86782341', 'sophia@gmail.com', 'C002', 7),
-	('Chairmaine', 'Blk 3, 1 King Albert Park, #04-115', '87891234', 'chairmaine@gmail.com', 'C002', 8),
-	('Bryan Lim', 'Blk 4, 1 King Albert Park, #03-108', '87892234', 'bryan.lim@gmail.com', 'C002', 8),
-	('Enzo Tan', 'Blk 4, 1 King Albert Park, #03-105', '81234567', 'enzo.tan@gmail.com', 'C002', 10),
-	('Fu Zheng Yi', 'Blk 5, 1 King Albert Park, #07-135', '82345678', 'fu.zhengyi@gmail.com', 'C002', 10),
-	('Kevin De Bruyne', 'Blk 5, 1 King Albert Park, #07-138', '83456789', 'kevin.debruyne@gmail.com', 'C002', 9),
-	('Tom Holland', 'Blk 1, 1 Lorong 20 Geylang, #05-118', '84567890', 'tom.holland@gmail.com', 'C003', 11),
-	('Bruno Mars', 'Blk 1, 50 - 76 Punggol Walk, #05-120', '87890123', 'bruno.mars@gmail.com', 'C004', 5),
-	('Fandi Ahmed', 'Blk 2, 7 Bishan Street 15, #05-118', '88901234', 'fandi.ahmed@gmail.com', 'C005', 6),
-	('Iqball', 'Blk 3, 8 Kitchener Link, #06-133', '82134567', 'iqball@gmail.com', 'C006', 12),
-	('Elysaa', 'Blk 7, 116-122 Serangoon Aveneue 3, #02-100', '83245678', 'elysaa@gmail.com', 'C007', 9),
-	('Keefe Chua', 'Blk 5, 21 McCallum Street, #05-120', '81224567', 'keefe.chua@gmail.com', 'C008', 8),
-    ('Eugene', 'Blk 5, Hougnag Avenue 6, #05-118', '83456889', 'eugene@gmail.com', 'C009', 13),
-    ('Marcus', 'Blk 2, 28 Beach Road, #06-128', '85678902', 'marcus@gmail.com', 'C010', 15),
-    ('Marcellus', 'Blk 3, 11-23 Sengkang Eaat Avenue, #03-103', '86789112', 'marcellus@gmail.com', 'C011', 7),
-    ('Melson', 'Blk 9A, 9A - 23D Bartley Road, #04-110', '87891123', 'melson@gmail.com', 'C012', 10),
-    ('Nicholas', 'Blk 4, 2 - 6B Simon Lane, #02-100', '88901254', 'nicholas@gmail.com', 'C013', 12),
-    ('Luis', 'Blk 2, 5 Anthony Road, #03-115', '89812345', 'luis@gmail.com', 'C014', 11),
-    ('Edric', 'Blk 5, 180 Depot Road, #06-130', '81023356', 'edric@gmail.com', 'C015', 8),
-	('HorizonBloom', 'King Albert Park 1', '87624321', 'horizonbloom@example.com','C001',9),
-	('SunRiseTech', 'Raffles Quay 45', '91234597', 'sunrise.tech@example.com','C002',3),
-	('ClearView Innovations', 'Bukit Timah Road 22', '82345671', 'clearview.innov@example.com','C003',2),
-	('StarLink Co.', 'Clarke Quay 78', '98165432', 'starlink@example.com','C004',12),
-	('SkyGrove Enterprises', 'Marina Bay Sands 15', '87154321', 'skygrove.ent@example.com','C005',13),
-	('SeaScape Solutions', 'East Coast Road 50', '82456789', 'seascape.sol@example.com','C006',11),
-	('FreshHarbor Ventures', 'Jurong West Street 18', '89012345', 'fresh.harbor@example.com','C007',5),
-	('BlueWave Industries', 'Yishun Avenue 2', '89654321', 'bluewave.ind@example.com','C008',8),
-	('PurePulse Technologies', 'Serangoon Central 31', '91234567', 'purepulse.tech@example.com','C009',9),
-	('EchoView Industries', 'Chinatown Point 40', '98865432', 'echoview@example.com','C010',6);
+	(1,'John Tan', 'Blk 3, 8 Marina Boulevard, #05-118', '87345678', 'john.tan@gmail.com', 'C001', 1),
+	(2,'Steve Smith', 'Blk 4, 8 Marina Boulevard, #06-128', '88654321', 'steve.smith@gmail.com', 'C001', 2),
+	(3,'Virat Kohli', 'Blk 2, 8 Marina Boulevard, #04-108', '86781234', 'virat.kohli@gmail.com', 'C001', 2),
+	(4,'Dwayne Johnson', 'Blk 3, 8 Marina Boulevard, #05-115', '81218765', 'dwayne.johnson@gmail.com', 'C001', 1),
+	(5,'Taylor Swift', 'Blk 6, 8 Marina Boulevard, #03-101', '98765432', 'taylor.swift@gmail.com', 'C001', 1),
+	(6,'Lious Teo', 'Blk 5, 8 Marina Boulevard, #06-130', '80321678', 'lious.teo@gmail.com', 'C001', 3),
+	(7,'Ethan Lim', 'Blk 2, 8 Marina Boulevard, #07-131', '87654321', 'ethan.lim@gmail.com', 'C001', 4),
+	(8,'Selana Gomez', 'Blk 1, 8 Marina Boulevard, #04-110', '83567890', 'selana.gomez@gmail.com', 'C001', 4),
+	(9,'Harry Maguire', 'Blk 7, 8 Marina Boulevard, #07-135', '85432123', 'harry.maguire@gmail.com', 'C001', 5),
+	(10,'Rachel Tan', 'Blk 1, 1 King Albert Park, #05-118', '82358765', 'rachel.tan@gmail.com', 'C002', 6),
+	(11,'Alan Walker', 'Blk 1, 1 King Albert Park, #05-120', '87651234', 'alan.walker@gmail.com', 'C002', 6),
+	(12,'Annabelle Chua', 'Blk 2, 1 King Albert Park, #06-128', '84561234', 'annabelle.chua@gmail.com', 'C002', 7),
+	(13,'Sophia', 'Blk 2, 1 King Albert Park, #06-138', '86782341', 'sophia@gmail.com', 'C002', 7),
+	(14,'Chairmaine', 'Blk 3, 1 King Albert Park, #04-115', '87891234', 'chairmaine@gmail.com', 'C002', 8),
+	(15,'Bryan Lim', 'Blk 4, 1 King Albert Park, #03-108', '87892234', 'bryan.lim@gmail.com', 'C002', 8),
+	(16,'Enzo Tan', 'Blk 4, 1 King Albert Park, #03-105', '81234567', 'enzo.tan@gmail.com', 'C002', 10),
+	(17,'Fu Zheng Yi', 'Blk 5, 1 King Albert Park, #07-135', '82345678', 'fu.zhengyi@gmail.com', 'C002', 10),
+	(18,'Kevin De Bruyne', 'Blk 5, 1 King Albert Park, #07-138', '83456789', 'kevin.debruyne@gmail.com', 'C002', 9),
+	(19,'Tom Holland', 'Blk 1, 1 Lorong 20 Geylang, #05-118', '84567890', 'tom.holland@gmail.com', 'C003', 11),
+	(20,'Bruno Mars', 'Blk 1, 50 - 76 Punggol Walk, #05-120', '87890123', 'bruno.mars@gmail.com', 'C004', 5),
+	(21,'Fandi Ahmed', 'Blk 2, 7 Bishan Street 15, #05-118', '88901234', 'fandi.ahmed@gmail.com', 'C005', 6),
+	(22,'Iqball', 'Blk 3, 8 Kitchener Link, #06-133', '82134567', 'iqball@gmail.com', 'C006', 12),
+	(23,'Elysaa', 'Blk 7, 116-122 Serangoon Aveneue 3, #02-100', '83245678', 'elysaa@gmail.com', 'C007', 9),
+	(24,'Keefe Chua', 'Blk 5, 21 McCallum Street, #05-120', '81224567', 'keefe.chua@gmail.com', 'C008', 8),
+    (25,'Eugene', 'Blk 5, Hougnag Avenue 6, #05-118', '83456889', 'eugene@gmail.com', 'C009', 13),
+    (26,'Marcus', 'Blk 2, 28 Beach Road, #06-128', '85678902', 'marcus@gmail.com', 'C010', 15),
+    (27,'Marcellus', 'Blk 3, 11-23 Sengkang Eaat Avenue, #03-103', '86789112', 'marcellus@gmail.com', 'C011', 7),
+    (28,'Melson', 'Blk 9A, 9A - 23D Bartley Road, #04-110', '87891123', 'melson@gmail.com', 'C012', 10),
+    (29,'Nicholas', 'Blk 4, 2 - 6B Simon Lane, #02-100', '88901254', 'nicholas@gmail.com', 'C013', 12),
+    (30,'Luis', 'Blk 2, 5 Anthony Road, #03-115', '89812345', 'luis@gmail.com', 'C014', 11),
+    (31,'Edric', 'Blk 5, 180 Depot Road, #06-130', '81023356', 'edric@gmail.com', 'C015', 8),
+	(32,'HorizonBloom', 'King Albert Park 1', '87624321', 'horizonbloom@example.com','C001',9),
+	(33,'SunRiseTech', 'Raffles Quay 45', '91234597', 'sunrise.tech@example.com','C002',3),
+	(34,'ClearView Innovations', 'Bukit Timah Road 22', '82345671', 'clearview.innov@example.com','C003',2),
+	(35,'StarLink Co.', 'Clarke Quay 78', '98165432', 'starlink@example.com','C004',12),
+	(36,'SkyGrove Enterprises', 'Marina Bay Sands 15', '87154321', 'skygrove.ent@example.com','C005',13),
+	(37,'SeaScape Solutions', 'East Coast Road 50', '82456789', 'seascape.sol@example.com','C006',11),
+	(38,'FreshHarbor Ventures', 'Jurong West Street 18', '89012345', 'fresh.harbor@example.com','C007',5),
+	(39,'BlueWave Industries', 'Yishun Avenue 2', '89654321', 'bluewave.ind@example.com','C008',8),
+	(40,'PurePulse Technologies', 'Serangoon Central 31', '91234567', 'purepulse.tech@example.com','C009',9),
+	(41,'EchoView Industries', 'Chinatown Point 40', '98865432', 'echoview@example.com','C010',6);
 	SELECT * FROM Account;
 
 --8.CondoMgmt
@@ -522,7 +523,7 @@ create table TempVehLabel
 	(30, '2023-03-17', 12);
 	Select * from Owner;
 
---10.Announcemen
+--10.Announcement
 	Insert into Announcement (AnnID, AnnText, AnnStartDate, AnnEndDate, CondoMgmID)
 	VALUES
 	('A001', 'Important maintenance notice.', '2023-09-10', '2023-09-30', 32),
@@ -578,45 +579,7 @@ create table TempVehLabel
 	('F6C9', 'Children Playground', NULL, 'C009');
 SELECT * From Facility;
 
---12.Booking
-INSERT INTO Booking (BookingID, BookingDate, BookingStatus, AccID, FacID, TimeSlotSn, SlotDate)
-VALUES
--- Account(1-9 in Condo 1 booked for facilty that are available in condo 1)
-('B1C001', '2023-10-12', 'PP', 1, 'F1C1', 1, '2023-10-15'),
-('B2C001', '2023-10-13', 'CC', 3, 'F1C1', 2, '2024-10-15'),
-('B3C001', '2023-10-14', 'CF', 5, 'F1C1', 3, '2024-10-15'),
-('B4C001', '2024-01-15', 'PP', 1, 'F2C1', 1, '2024-01-18'),
-('B5C001', '2024-01-16', 'CF', 2, 'F2C1', 2, '2024-01-18'),
-('B6C001', '2024-01-16', 'CF', 4, 'F2C1', 3, '2024-01-18'),
-('B7C001', '2024-02-18', 'PP', 7, 'F3C1', 1, '2024-02-22'),
-('B8C001', '2024-02-19', 'CF', 9, 'F3C1', 2, '2024-02-22'),
-('B9C001', '2024-02-20', 'CC', 1, 'F3C1', 3, '2024-02-22'),
-('B10C001', '2023-10-12', 'PP', 2, 'F4C1', 1, '2023-10-15'),
-('B11C001', '2023-10-13', 'CF', 8, 'F4C1', 2, '2023-10-15'),
-('B12C001', '2023-10-13', 'CF', 6, 'F4C1', 3, '2023-10-15'),
-('B13C001', '2024-02-15', 'PP', 4, 'F5C1', 1, '2024-02-18'),
-('B14C001', '2024-02-15', 'CF', 3, 'F5C1', 2, '2024-02-18'),
-('B15C001', '2024-02-17', 'CC', 5, 'F5C1', 3, '2024-02-18'),
--- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
-('B1C002', '2023-10-12', 'PP', 11, 'F1C2', 1, '2023-10-15'),
-('B2C002', '2023-10-13', 'CC', 13, 'F1C2', 2, '2024-10-15'),
-('B3C002', '2023-10-14', 'CF', 15, 'F1C2', 3, '2024-10-15'),
-('B4C002', '2024-01-15', 'PP', 11, 'F2C2', 1, '2024-01-18'),
-('B5C002', '2024-01-16', 'CF', 12, 'F2C2', 2, '2024-01-18'),
-('B6C002', '2024-01-16', 'CF', 14, 'F2C2', 3, '2024-01-18'),
-('B7C002', '2024-02-18', 'PP', 17, 'F3C2', 1, '2024-02-22'),
-('B8C002', '2024-02-19', 'CF', 15, 'F3C2', 2, '2024-02-22'),
-('B9C002', '2024-02-20', 'CC', 11, 'F3C2', 3, '2024-02-22'),
-('B10C002', '2023-10-12', 'PP', 12, 'F4C2', 1, '2023-10-15'),
-('B11C002', '2023-10-13', 'CF', 18, 'F4C2', 2, '2023-10-15'),
-('B12C002', '2023-10-13', 'CF', 16, 'F4C2', 3, '2023-10-15'),
-('B13C002', '2024-02-15', 'PP', 14, 'F5C2', 1, '2024-02-18'),
-('B14C002', '2024-02-15', 'CF', 13, 'F5C2', 2, '2024-02-18'),
-('B15C002', '2024-02-17', 'CC', 15, 'F5C2', 3, '2024-02-18');
-Select * from Booking;
-
-
---13. FacTimeSlot
+--12. FacTimeSlot
 INSERT INTO FacTimeSlot (FacID, TimeSlotSN, SlotDesc)
 VALUES
 -- Time slots for facilities in Condo C001
@@ -728,21 +691,154 @@ VALUES
 ('F6C9', 3, 'Evening Slot: 6 PM to 12 AM');
 Select * from FacTimeSlot
 
-
---16. Message
-INSERT INTO Message (MsgID, Msgtext, Msgtype, PostedBy, ReplyTo)
+--13.BookSlot
+INSERT INTO BookSlot(FacID, TimeSlotSN, SlotDate, SlotStatus)
 VALUES
-('MSG00001', 'Looking for a jogging partner in our community. Anyone interested?', 'F', 5, NULL), 
-('MSG00002', 'Hosting a garage sale this Saturday at Block 3. Lots of kids’ items and books!', 'G', 12, NULL),
-('MSG00003', 'Can anyone recommend a reliable handyman for some minor repairs?', 'C', 15, NULL), 
-('MSG00004', 'Lost dog spotted near the community park. Seems friendly. Please check if it’s yours.', 'C', 7, 'MSG00002'), 
-('MSG00005', 'Interested in starting a community garden project. Who wants to join?', 'C', 22, NULL),
-('MSG00006', 'Selling a gently used coffee table. DM for pictures and details.', 'G', 30, NULL), 
-('MSG00007', 'Anyone up for a weekly board game night at the clubhouse?', 'F', 2, NULL), 
-('MSG00008', 'Reminder: Don’t forget to vote in the condo board elections this Friday.', 'C', 9, NULL), 
-('MSG00009', 'Looking for a tennis partner. I’m an intermediate player hoping to play on weekends.', 'F', 18, NULL),
-('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, NULL); 
-Select * from Message
+-- Time slots for facilities in Condo C001
+('F1C1', 1, '2023-09-20', 'A'),
+('F1C1', 2, '2023-09-20', 'M'),
+('F1C1', 3, '2023-09-20', 'B'),
+('F2C1', 1, '2023-09-19', 'A'),
+('F2C1', 2, '2023-09-19', 'A'),
+('F2C1', 3, '2023-09-19', 'A'),
+('F3C1', 1, '2023-09-18', 'B'),
+('F3C1', 2, '2023-09-18', 'M'),
+('F3C1', 3, '2023-09-18', 'B'),
+('F4C1', 1, '2023-09-17', 'A'),
+('F4C1', 2, '2023-09-17', 'B'),
+('F4C1', 3, '2023-09-17', 'A'),
+('F5C1', 1, '2023-09-16', 'A'),
+('F5C1', 2, '2023-09-16', 'B'),
+('F5C1', 3, '2023-09-16', 'M'),
+('F6C1', 1, '2023-09-15', 'B'),
+('F6C1', 2, '2023-09-15', 'A'),
+('F6C1', 3, '2023-09-15', 'B'),
+
+-- Time slots for facilities in Condo C002
+('F1C2', 1, '2023-09-20', 'B'),
+('F1C2', 2, '2023-09-20', 'A'),
+('F1C2', 3, '2023-09-20', 'B'),
+('F2C2', 1, '2023-09-19', 'B'),
+('F2C2', 2, '2023-09-19', 'A'),
+('F2C2', 3, '2023-09-19', 'M'),
+('F3C2', 1, '2023-09-18', 'A'),
+('F3C2', 2, '2023-09-18', 'M'),
+('F3C2', 3, '2023-09-18', 'B'),
+('F4C2', 1, '2023-09-17', 'B'),
+('F4C2', 2, '2023-09-17', 'M'),
+('F4C2', 3, '2023-09-17', 'A'),
+('F5C2', 1, '2023-09-16', 'A'),
+('F5C2', 2, '2023-09-16', 'B'),
+('F5C2', 3, '2023-09-16', 'B'),
+('F6C2', 1, '2023-09-15', 'A'),
+('F6C2', 2, '2023-09-15', 'A'),
+('F6C2', 3, '2023-09-15', 'A'),
+
+-- Time slots for facilities in Condo C003
+('F1C3', 1, '2023-09-20', 'A'),
+('F1C3', 2, '2023-09-20', 'A'),
+('F1C3', 3, '2023-09-20', 'A'),
+('F2C3', 1, '2023-09-19', 'B'),
+('F2C3', 2, '2023-09-19', 'B'),
+('F2C3', 3, '2023-09-19', 'M'),
+('F3C3', 1, '2023-09-18', 'A'),
+('F3C3', 2, '2023-09-18', 'B'),
+('F3C3', 3, '2023-09-18', 'B'),
+('F4C3', 1, '2023-09-17', 'A'),
+('F4C3', 2, '2023-09-17', 'M'),
+('F4C3', 3, '2023-09-17', 'B'),
+('F5C3', 1, '2023-09-16', 'M'),
+('F5C3', 2, '2023-09-16', 'A'),
+('F5C3', 3, '2023-09-16', 'B'),
+('F6C3', 1, '2023-09-15', 'A'),
+('F6C3', 2, '2023-09-15', 'A'),
+('F6C3', 3, '2023-09-15', 'A'),
+
+-- Time slots for facilities in Condo C004
+('F1C4', 1, '2023-09-20', 'A'),
+('F1C4', 2, '2023-09-20', 'B'),
+('F1C4', 3, '2023-09-20', 'B'),
+('F4C4', 1, '2023-09-19', 'A'),
+('F4C4', 2, '2023-09-19', 'B'),
+('F4C4', 3, '2023-09-19', 'A'),
+
+-- Time slots for facilities in Condo C005
+('F2C5', 1, '2023-09-20', 'M'),
+('F2C5', 2, '2023-09-20', 'B'),
+('F2C5', 3, '2023-09-20', 'A'),
+('F3C5', 1, '2023-09-19', 'B'),
+('F3C5', 2, '2023-09-19', 'A'),
+('F3C5', 3, '2023-09-19', 'B'),
+
+-- Time slots for facilities in Condo C006
+('F1C6', 1, '2023-09-20', 'B'),
+('F1C6', 2, '2023-09-20', 'A'),
+('F1C6', 3, '2023-09-20', 'M'),
+('F4C6', 1, '2023-09-19', 'A'),
+('F4C6', 2, '2023-09-19', 'B'),
+('F4C6', 3, '2023-09-19', 'A'),
+
+-- Time slots for facilities in Condo C007
+('F2C7', 1, '2023-09-20', 'A'),
+('F2C7', 2, '2023-09-20', 'M'),
+('F2C7', 3, '2023-09-20', 'A'),
+('F3C7', 1, '2023-09-19', 'A'),
+('F3C7', 2, '2023-09-19', 'B'),
+('F3C7', 3, '2023-09-19', 'M'),
+
+-- Time slots for facilities in Condo C008
+('F5C8', 1, '2023-09-20', 'A'),
+('F5C8', 2, '2023-09-20', 'B'),
+('F5C8', 3, '2023-09-20', 'B'),
+('F6C8', 1, '2023-09-19', 'B'),
+('F6C8', 2, '2023-09-19', 'B'),
+('F6C8', 3, '2023-09-19', 'A'),
+
+-- Time slots for facilities in Condo C009
+('F5C9', 1, '2023-09-20', 'B'),
+('F5C9', 2, '2023-09-20', 'A'),
+('F5C9', 3, '2023-09-20', 'B'),
+('F6C9', 1, '2023-09-19', 'M'),
+('F6C9', 2, '2023-09-19', 'B'),
+('F6C9', 3, '2023-09-19', 'M')
+select * from BookSlot
+
+--14.Booking
+INSERT INTO Booking (BookingID, BookingDate, BookingStatus, AccID, FacID, TimeSlotSn, SlotDate)
+VALUES
+-- Account(1-9 in Condo 1 booked for facilty that are available in condo 1)
+('B1C001', '2023-10-12', 'PP', 1, 'F1C1', 1, '2023-09-20'),
+('B2C001', '2023-10-13', 'CC', 3, 'F1C1', 2, '2023-09-20'),
+('B3C001', '2023-10-14', 'CF', 5, 'F1C1', 3, '2023-09-20'),
+('B4C001', '2024-01-15', 'PP', 1, 'F2C1', 1, '2023-09-19'),
+('B5C001', '2024-01-16', 'CF', 2, 'F2C1', 2, '2023-09-19'),
+('B6C001', '2024-01-16', 'CF', 4, 'F2C1', 3, '2023-09-19'),
+('B7C001', '2024-02-18', 'PP', 7, 'F3C1', 1, '2023-09-18'),
+('B8C001', '2024-02-19', 'CF', 9, 'F3C1', 2, '2023-09-18'),
+('B9C001', '2024-02-20', 'CC', 1, 'F3C1', 3, '2023-09-18'),
+('B10C001', '2023-10-12', 'PP', 2, 'F4C1', 1, '2023-09-17'),
+('B11C001', '2023-10-13', 'CF', 8, 'F4C1', 2, '2023-09-17'),
+('B12C001', '2023-10-13', 'CF', 6, 'F4C1', 3, '2023-09-17'),
+('B13C001', '2024-02-15', 'PP', 4, 'F5C1', 1, '2023-09-16'),
+('B14C001', '2024-02-15', 'CF', 3, 'F5C1', 2, '2023-09-16'),
+('B15C001', '2024-02-17', 'CC', 5, 'F5C1', 3, '2023-09-16'),
+-- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
+('B1C002', '2023-10-12', 'PP', 11, 'F1C2', 1, '2023-09-20'),
+('B2C002', '2023-10-13', 'CC', 13, 'F1C2', 2, '2023-09-20'),
+('B3C002', '2023-10-14', 'CF', 15, 'F1C2', 3, '2023-09-20'),
+('B4C002', '2024-01-15', 'PP', 11, 'F2C2', 1, '2023-09-19'),
+('B5C002', '2024-01-16', 'CF', 12, 'F2C2', 2, '2023-09-19'),
+('B6C002', '2024-01-16', 'CF', 14, 'F2C2', 3, '2023-09-19'),
+('B7C002', '2024-02-18', 'PP', 17, 'F3C2', 1, '2023-09-18'),
+('B8C002', '2024-02-19', 'CF', 15, 'F3C2', 2, '2023-09-18'),
+('B9C002', '2024-02-20', 'CC', 11, 'F3C2', 3, '2023-09-18'),
+('B10C002', '2023-10-12', 'PP', 12, 'F4C2', 1, '2023-09-17'),
+('B11C002', '2023-10-13', 'CF', 18, 'F4C2', 2, '2023-09-17'),
+('B12C002', '2023-10-13', 'CF', 16, 'F4C2', 3, '2023-09-17'),
+('B13C002', '2024-02-15', 'PP', 14, 'F5C2', 1, '2023-09-16'),
+('B14C002', '2024-02-15', 'CF', 13, 'F5C2', 2, '2023-09-16'),
+('B15C002', '2024-02-17', 'CC', 15, 'F5C2', 3, '2023-09-16');
+Select * from Booking;
 
 --15. Feedback
 INSERT INTO Feedback (FbkID, FbkDesc, FbkDateTime, FbkStatus, ByAccID, FbkCatID, CondoMgmID)
@@ -759,6 +855,21 @@ VALUES
 ('FBK010', 'Inadequate lighting in the rear parking area.', '2024-03-10 20:50:00', 'P', 30, 'FC005', 37);
 Select * from Feedback
 
+--16. Message
+INSERT INTO Message (MsgID, Msgtext, Msgtype, PostedBy, ReplyTo)
+VALUES
+('MSG00001', 'Looking for a jogging partner in our community. Anyone interested?', 'F', 5, NULL), 
+('MSG00002', 'Hosting a garage sale this Saturday at Block 3. Lots of kids’ items and books!', 'G', 12, NULL),
+('MSG00003', 'Can anyone recommend a reliable handyman for some minor repairs?', 'C', 15, NULL), 
+('MSG00004', 'Lost dog spotted near the community park. Seems friendly. Please check if it’s yours.', 'C', 7, 'MSG00002'), 
+('MSG00005', 'Interested in starting a community garden project. Who wants to join?', 'C', 22, NULL),
+('MSG00006', 'Selling a gently used coffee table. DM for pictures and details.', 'G', 30, NULL), 
+('MSG00007', 'Anyone up for a weekly board game night at the clubhouse?', 'F', 2, NULL), 
+('MSG00008', 'Reminder: Don’t forget to vote in the condo board elections this Friday.', 'C', 9, NULL), 
+('MSG00009', 'Looking for a tennis partner. I’m an intermediate player hoping to play on weekends.', 'F', 18, NULL),
+('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, NULL); 
+Select * from Message
+
 /* Tables without foreign key 
 1.	Condo
 2.	ContactCat
@@ -773,9 +884,9 @@ Table with foreign key
 9.	Owner
 10.	Annoucement
 11.	Facility
-12. Booking
-13. FacTimeSlot
-14.	BookSlot
+12. FacTimeSlot
+13. BookSlot
+14.	Booking
 15. Feedback
 16.	Message
 17.	ItemPhoto
