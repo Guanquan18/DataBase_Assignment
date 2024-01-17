@@ -616,6 +616,149 @@ VALUES
 Select * from Booking;
 
 
+--13. FacTimeSlot
+INSERT INTO FacTimeSlot (FacID, TimeSlotSN, SlotDesc)
+VALUES
+-- Time slots for facilities in Condo C001
+('F1C1', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F2C1', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F3C1', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F3C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F3C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F4C1', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F4C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F4C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F5C1', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F5C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F5C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F6C1', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F6C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F6C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C002
+('F1C2', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F2C2', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F3C2', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F3C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F3C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F4C2', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F4C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F4C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F5C2', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F5C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F5C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F6C2', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F6C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F6C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C003
+('F1C3', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F2C3', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F3C3', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F3C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F3C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F4C3', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F4C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F4C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F5C3', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F5C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F5C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F6C3', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F6C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F6C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C004
+('F1C4', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C4', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C4', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F4C4', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F4C4', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F4C4', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C005
+('F2C5', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C5', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C5', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F3C5', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F3C5', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F3C5', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C006
+('F1C6', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C6', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C6', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F4C6', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F4C6', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F4C6', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C007
+('F2C7', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C7', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C7', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F3C7', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F3C7', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F3C7', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C008
+('F5C8', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F5C8', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F5C8', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F6C8', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F6C8', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F6C8', 3, 'Evening Slot: 6 PM to 12 AM'),
+
+-- Time slots for facilities in Condo C009
+('F5C9', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F5C9', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F5C9', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F6C9', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F6C9', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F6C9', 3, 'Evening Slot: 6 PM to 12 AM');
+Select * from FacTimeSlot
+
+
+--16. Message
+INSERT INTO Message (MsgID, Msgtext, Msgtype, PostedBy, ReplyTo)
+VALUES
+('MSG00001', 'Looking for a jogging partner in our community. Anyone interested?', 'F', 5, NULL), 
+('MSG00002', 'Hosting a garage sale this Saturday at Block 3. Lots of kids’ items and books!', 'G', 12, NULL),
+('MSG00003', 'Can anyone recommend a reliable handyman for some minor repairs?', 'C', 15, NULL), 
+('MSG00004', 'Lost dog spotted near the community park. Seems friendly. Please check if it’s yours.', 'C', 7, 'MSG00002'), 
+('MSG00005', 'Interested in starting a community garden project. Who wants to join?', 'C', 22, NULL),
+('MSG00006', 'Selling a gently used coffee table. DM for pictures and details.', 'G', 30, NULL), 
+('MSG00007', 'Anyone up for a weekly board game night at the clubhouse?', 'F', 2, NULL), 
+('MSG00008', 'Reminder: Don’t forget to vote in the condo board elections this Friday.', 'C', 9, NULL), 
+('MSG00009', 'Looking for a tennis partner. I’m an intermediate player hoping to play on weekends.', 'F', 18, NULL),
+('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, NULL); 
+Select * from Message
+
+--15. Feedback
+INSERT INTO Feedback (FbkID, FbkDesc, FbkDateTime, FbkStatus, ByAccID, FbkCatID, CondoMgmID)
+VALUES
+('FBK001', 'The hallway on the 3rd floor is not properly cleaned.', '2024-03-01 10:00:00', 'S', 5, 'FC001', 31),
+('FBK002', 'The security gate is malfunctioning frequently.', '2024-03-02 15:30:00', 'P', 12, 'FC002', 32),
+('FBK003', 'Leaky faucet in the community gym restroom.', '2024-03-03 09:00:00', 'S', 7, 'FC003', NULL),
+('FBK004', 'Cracks observed on the sidewall of building B.', '2024-03-04 14:20:00', 'P', 15, 'FC004', 33),
+('FBK005', 'Parking lot line markings are faded and need repainting.', '2024-03-05 13:00:00', 'S', 20, 'FC005', NULL),
+('FBK006', 'Loud music from apartment 5B during late-night hours.', '2024-03-06 22:00:00', 'P', 9, 'FC006', 34),
+('FBK007', 'Broken equipment in the fitness center.', '2024-03-07 16:45:00', 'S', 18, 'FC007', 35),
+('FBK008', 'Littering around the community playground.', '2024-03-08 11:30:00', 'P', 22, 'FC001', NULL),
+('FBK009', 'Elevator doors closing too quickly, posing a safety hazard.', '2024-03-09 17:15:00', 'S', 25, 'FC008', 36),
+('FBK010', 'Inadequate lighting in the rear parking area.', '2024-03-10 20:50:00', 'P', 30, 'FC005', 37);
+Select * from Feedback
+
 /* Tables without foreign key 
 1.	Condo
 2.	ContactCat
