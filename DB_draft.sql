@@ -422,21 +422,24 @@ create table TempVehLabel
 --6.Vehicle
 	Insert into Vehicle
 	values
-	('V001', 'IU12345678', 'OW', 'Toyota', 'RAV4'),
-    ('V002', 'IU98765432', 'RT', 'Nissan', 'Rogue'),
-    ('V003', 'IU87654321', 'CC', 'Ford', 'Mustang'),
-    ('V004', 'IU23456789', 'OT', 'Chevrolet', 'Camaro'),
-    ('V005', 'IU34567890', 'CC', 'Nissan', 'Altima'),
-    ('V006', 'IU54321987', 'RT', 'BMW', '5 Series'),
-    ('V007', 'IU81726354', 'OT', 'Mercedes-Benz', 'GLC'),
-    ('V008', 'IU01928374', 'OT', 'Mercedes-Benz', 'E-Class'),
-    ('V009', 'IU56789012', 'OW', 'Honda', 'Civic'),
-    ('V010', 'IU10203040', 'RT', 'Kia', 'Optima'),
-    ('V011', 'IU21324165', 'CC', 'Tesla', 'Model X'),
-    ('V012', 'IU34127691', 'OT', 'Lexus', 'ES'),
-    ('V013', 'IU90785634', 'OW', 'Mazda', 'Mazda6'),
-    ('V014', 'IU09807061', 'RT', 'Volkswagen', 'Tiguan	'),
-    ('V015', 'IU40782367', 'OW', 'BMW', 'X3');
+		('V00001', 'IU12345678', 'OW', 'Toyota', 'RAV4'),
+		('V00002', 'IU98765432', 'RT', 'Nissan', 'Rogue'),
+		('V00003', 'IU87654321', 'CC', 'Ford', 'Mustang'),
+		('V00004', 'IU23456789', 'OT', 'Chevrolet', 'Camaro'),
+		('V00005', 'IU34567890', 'CC', 'Nissan', 'Altima'),
+		('V00006', 'IU54321987', 'RT', 'BMW', '5 Series'),
+		('V00007', 'IU81726354', 'OT', 'Mercedes-Benz', 'GLC'),
+		('V00008', 'IU01928374', 'OT', 'Mercedes-Benz', 'E-Class'),
+		('V00009', 'IU56789012', 'OW', 'Honda', 'Civic'),
+		('V00010', 'IU10203040', 'RT', 'Kia', 'Optima'),
+		('V00011', 'IU21324165', 'CC', 'Tesla', 'Model X'),
+		('V00012', 'IU34127691', 'OT', 'Lexus', 'ES'),
+		('V00013', 'IU90785634', 'OW', 'Mazda', 'Mazda6'),
+		('V00014', 'IU09807061', 'RT', 'Volkswagen', 'Tiguan'),
+		('V00015', 'IU40782367', 'OW', 'BMW', 'X3'),
+		('V00016', 'IU99729173', 'OW', 'Porsche', '911 Carrera'),
+		('V00017', 'IU55828173', 'OW', 'Renault', 'Captur')
+		('V00018', 'IU72790012', 'RT', 'Honda', 'City');
 
 	SELECT * from Vehicle
 
@@ -961,7 +964,7 @@ VALUES
 ('UC0002',	'Sairam',		'', '23456789',	'CC002'),
 ('UC0003',	'Kesh',			'', '34567890',	'CC003'),
 ('UC0004',	'Zhi Zun',		'', '45678901',	'CC004'),
-('UC0005',	'Lavan',		'', '56789012',	'CC005'),
+('UC0005',	'Laven',		'', '56789012',	'CC005'),
 ('UC0006',	'Allah',		'', '67890123',	'CC006'),
 ('UC0007',	'Akbah',		'', '78901234',	'CC001'),
 ('UC0008',	'Tim',			'', '89012345',	'CC002'),
@@ -1007,12 +1010,30 @@ select * from CondoUsefulContact
 --23. VehicleLabel
 INSERT INTO VehicleLabel (VehLblAppID, VehLblStatus, VehLblNum, VehicleNo, AppliedBy, IssuedBy)
 VALUES
-()
+('VL00001', 'A', 'VN00001', 'V00001', 15, 34)
+('VL00002', 'A', 'VN00002', 'V00012', 15, 34)	
+('VL00003', 'R', 'VN00003', 'V00009', 11, 32)	
+('VL00004', 'A', 'VN00004', 'V00002', 9, 36)
+('VL00005', 'A', 'VN00005', 'V00006', 2, 35)	
+('VL00006', 'A', 'VN00006', 'V00014', 7, 40)	
+('VL00007', 'P', 'VN00007', 'V00004', 8, 31)	
+('VL00008', 'R', 'VN00008', 'V00010', 22, 38)	
+('VL00009', 'P', 'VN00009', 'V00003', 17, 36)	
+('VL00010', 'A', 'VN00010', 'V00009', 21, 37)	
+('VL00011', 'P', 'VN00011', 'V00005', 12, 33)	
+('VL00012', 'A', 'VN00012', 'V00017', 23, 31)	
+('VL00013', 'A', 'VN00013', 'V00013', 27, 40)	
+('VL00014', 'A', 'VN00014', 'V00010', 18, 39)	
+('VL00015', 'A', 'VN00015', 'V00018', 12, 36)	
+('VL00016', 'A', 'VN00016', 'V00013', 05, 33)	
 
 --24. TempVehLabel
 INSERT INTO TempVehLabel (VehLblAppID, TempStartDate, TempExpiryDate)
 VALUES
-()
+('VL00006')
+('VL00010')
+('VL00012')
+
 
 /* Tables without foreign key 
 1.	Condo
