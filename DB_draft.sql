@@ -928,15 +928,14 @@ VALUES
 (11, 'MSG00006'),
 (14, 'MSG00006'),
 (20, 'MSG00007'),
-(20, 'MSG00007'),
+(25, 'MSG00007'),
 (23, 'MSG00008'),
 (28, 'MSG00009'),
 (29, 'MSG00009'),
-(30, 'MSG000010'),
-(30, 'MSG000010')
+(30, 'MSG00010'),
+(32, 'MSG00010')
 select * from Likes
 
-drop table Tenant
 --20. Tenant
 INSERT INTO Tenant (TenantID, ContactStartDate, ContactEndDate, VerifiedBy)
 VALUES
