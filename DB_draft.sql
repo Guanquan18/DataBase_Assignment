@@ -558,7 +558,7 @@ create table TempVehLabel
 	('F4C1', 'Tennis Court', 10.00, 'C001'),
 	('F5C1', 'Function Room', 50.00, 'C001'),
 	('F6C1', 'Children Playground', NULL, 'C001'),
-	('F1C2', 'Swimming Pool', NULL, 'C001'),
+	('F1C2', 'Swimming Pool', NULL, 'C002'),
 	('F2C2', 'Gym', 12.00, 'C002'),
 	('F3C2', 'BBQ Pit Area', 35.00, 'C002'),
 	('F4C2', 'Tennis Court', 11.00, 'C002'),
