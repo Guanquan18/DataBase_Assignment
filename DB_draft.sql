@@ -1,3 +1,4 @@
+
 -- Switch to the new database
 --USE db_Assignment_my_own;
 /*	start with Tables with no foreign key	*/
@@ -183,8 +184,9 @@ create table Booking
 		references Account (AccID),
 	constraint FK_Booking_FacID_TimeSlotSn_SlotDate foreign key (FacID,TimeSlotSN,SlotDate)
 		references BookSlot (FacID,TimeSlotSN,SlotDate),
-	constraint Ck_Booking_BookingDate_SlotDate check(BookingDate<=SlotDate)
-)
+	constraint Ck_Booking_BookingDate_SlotDate check(BookingDate<=SlotDate),
+	constraint CK_Booking_FacID_TimeSlotSn_SlotDate UNIQUE (FacID,TimeSlotSN,SlotDate)
+	)
 
 --15. (Table 11)
 create table Feedback
@@ -827,7 +829,7 @@ VALUES
 ('B14C001', '2023-06-11', 'CF', 3, 'F5C1', 2, '2023-09-16'),
 ('B15C001', '2023-05-11', 'PP', 5, 'F5C1', 3, '2023-09-16'),
 -- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
-('B1C002', '2023-08-20', 'Cf', 11, 'F1C2', 1, '2023-09-20'),
+('B1C002', '2023-08-20', 'CF', 11, 'F1C2', 1, '2023-09-20'),
 ('B2C002', '2023-08-19', 'PP', 13, 'F1C2', 2, '2023-09-20'),
 ('B3C002', '2023-08-18', 'CF', 15, 'F1C2', 3, '2023-09-20'),
 ('B4C002', '2023-08-18', 'CF', 11, 'F2C2', 1, '2023-09-19'),
