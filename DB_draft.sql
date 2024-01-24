@@ -394,7 +394,9 @@ create table TempVehLabel
 		('IC003', 'Furniture'),
 		('IC004', 'Electronics'),
 		('IC005', 'Sports and Outdoors'),
-		('iC006', 'Toys and Games')
+		('IC006', 'Toys and Games'),
+		('IC007', 'Books'),
+		('IC008', 'Others')
 	select * from ItemCategory;
 
 --5.Staff
@@ -810,26 +812,26 @@ select * from BookSlot
 INSERT INTO Booking (BookingID, BookingDate, BookingStatus, AccID, FacID, TimeSlotSn, SlotDate)
 VALUES
 -- Account(1-9 in Condo 1 booked for facilty that are available in condo 1)
-('B1C001', '2023-09-20', 'PP', 1, 'F1C1', 1, '2023-09-20'),
-('B3C001', '2023-09-19', 'CF', 5, 'F1C1', 3, '2023-09-20'),
-('B4C001', '2023-09-18', 'PP', 1, 'F2C1', 1, '2023-09-19'),
-('B5C001', '2023-09-18', 'CC', 2, 'F2C1', 2, '2023-09-19'),
-('B6C001', '2023-09-18', 'PP', 4, 'F2C1', 3, '2023-09-19'),
-('B7C001', '2023-09-17', 'CF', 7, 'F3C1', 1, '2023-09-18'),
-('B8C001', '2023-09-17', 'PP', 9, 'F3C1', 2, '2023-09-18'),
-('B9C001', '2023-09-16', 'CF', 1, 'F3C1', 3, '2023-09-18'),
-('B10C001', '2023-09-12', 'PP', 2, 'F4C1', 1, '2023-09-17'),
-('B11C001', '2023-09-12', 'CF', 8, 'F4C1', 2, '2023-09-17'),
-('B12C001', '2023-09-12', 'CC', 6, 'F4C1', 3, '2023-09-17'),
+('B1C001', '2023-08-20', 'PP', 1, 'F1C1', 1, '2023-09-20'),
+('B3C001', '2023-08-19', 'CF', 5, 'F1C1', 3, '2023-09-20'),
+('B4C001', '2023-08-18', 'PP', 1, 'F2C1', 1, '2023-09-19'),
+('B5C001', '2023-08-18', 'CC', 2, 'F2C1', 2, '2023-09-19'),
+('B6C001', '2023-08-18', 'PP', 4, 'F2C1', 3, '2023-09-19'),
+('B7C001', '2023-08-17', 'CF', 7, 'F3C1', 1, '2023-09-18'),
+('B8C001', '2023-08-17', 'PP', 9, 'F3C1', 2, '2023-09-18'),
+('B9C001', '2023-08-16', 'CF', 1, 'F3C1', 3, '2023-09-18'),
+('B10C001', '2023-08-12', 'PP', 2, 'F4C1', 1, '2023-09-17'),
+('B11C001', '2023-07-12', 'CF', 8, 'F4C1', 2, '2023-09-17'),
+('B12C001', '2023-07-12', 'CC', 6, 'F4C1', 3, '2023-09-17'),
 ('B13C001', '2023-07-11', 'PP', 4, 'F5C1', 1, '2023-09-16'),
-('B14C001', '2023-07-11', 'CF', 3, 'F5C1', 2, '2023-09-16'),
-('B15C001', '2023-07-11', 'PP', 5, 'F5C1', 3, '2023-09-16'),
+('B14C001', '2023-06-11', 'CF', 3, 'F5C1', 2, '2023-09-16'),
+('B15C001', '2023-05-11', 'PP', 5, 'F5C1', 3, '2023-09-16'),
 -- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
-('B1C002', '2023-09-20', 'Cf', 11, 'F1C2', 1, '2023-09-20'),
-('B2C002', '2023-09-19', 'PP', 13, 'F1C2', 2, '2023-09-20'),
-('B3C002', '2023-09-18', 'CF', 15, 'F1C2', 3, '2023-09-20'),
-('B4C002', '2023-09-18', 'CF', 11, 'F2C2', 1, '2023-09-19'),
-('B5C002', '2023-09-16', 'PP', 12, 'F2C2', 2, '2023-09-19'),
+('B1C002', '2023-08-20', 'Cf', 11, 'F1C2', 1, '2023-09-20'),
+('B2C002', '2023-08-19', 'PP', 13, 'F1C2', 2, '2023-09-20'),
+('B3C002', '2023-08-18', 'CF', 15, 'F1C2', 3, '2023-09-20'),
+('B4C002', '2023-08-18', 'CF', 11, 'F2C2', 1, '2023-09-19'),
+('B5C002', '2023-08-16', 'PP', 12, 'F2C2', 2, '2023-09-19'),
 ('B6C002', '2023-08-16', 'CC', 14, 'F2C2', 3, '2023-09-19'),
 ('B7C002', '2023-08-15', 'PP', 17, 'F3C2', 1, '2023-09-18'),
 ('B8C002', '2023-08-15', 'CC', 15, 'F3C2', 2, '2023-09-18'),
@@ -870,7 +872,18 @@ VALUES
 ('MSG00007', 'Anyone up for a weekly board game night at the clubhouse?', 'F', 2, NULL), 
 ('MSG00008', 'Reminder: Don’t forget to vote in the condo board elections this Friday.', 'C', 9, NULL), 
 ('MSG00009', 'Looking for a tennis partner. I’m an intermediate player hoping to play on weekends.', 'F', 18, NULL),
-('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, NULL); 
+('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, NULL),
+('MSG00011', 'Selling an unopened Tom Ford Oud EDP for men', 'G', 8, NULL), 
+('MSG00012', 'Looking to let go of my used Ralph Lauren half zipper', 'G', 21, NULL),
+('MSG00013', 'Letting go of a prevloved Nintendo switch console', 'G', 17, NULL),
+('MSG00014', '15 inch MacBook Pro 2013 up for sale', 'G', 25, NULL),
+('MSG00015', 'Selling an unused Dyson AirWrap', 'G', 24, NULL),
+('MSG00016', 'Letting go off my old science book', 'G', 14, NULL),
+('MSG00017', 'Preloved Iphone 3gs', 'G', 28, NULL),
+('MSG00018', 'Cute pearl necklace for sale', 'G', 30, NULL),
+('MSG00019', 'Aesop travel pack to let go', 'G', 16, NULL);
+
+
 Select * from Message
 
 --17. ItemPhoto
@@ -915,8 +928,34 @@ VALUES
 --	Photos for Message 10
 ('MSG00010', 'Photo 1'),
 ('MSG00010', 'Photo 2'),
-('MSG00010', 'Photo 3')
+('MSG00010', 'Photo 3'),
+-- Photos for Message 11 - 19
+('MSG00011', 'Photo 1'),
+('MSG00012', 'Photo 1'),
+('MSG00013', 'Photo 1'),
+('MSG00014', 'Photo 1'),
+('MSG00015', 'Photo 1'),
+('MSG00016', 'Photo 1'),
+('MSG00017', 'Photo 1'),
+('MSG00018', 'Photo 1'),
+('MSG00019', 'Photo 1');
 select * from ItemPhoto
+
+--18. ItemRelated
+INSERT INTO ItemRelated (ItemID, ItemDesc, ItemPrice, ItemStatus,SaleOrRent, ItemCatID)
+VALUES
+('MSG00002', 'Peppa Pig picture book', '$5', 'Available', 'Sale', 'IC007'),
+('MSG00006', 'Gently used Rustica coffee table', '$30', 'Available', 'Sale', 'IC003'),
+('MSG00010', 'Edison record player from 1976', '$120.53', 'Available', 'Sale', 'IC008'),
+('MSG00011', 'Tom Ford Oud EDP: Got it as a christmas gift, never used, 100ml', '$70', 'Available', 'Sale', 'IC002'),
+('MSG00012', 'Ralph Lauren Half Zipper: Used about 7 times', '$15', 'Available', 'Sale', 'IC002'),
+('MSG00013', 'Nintendo switch: Had it for about 7 years, time to let go', '$10', 'Sold', 'Sale', 'IC006'),
+('MSG00014', 'Macbook Pro 2013: 256SSD, 16GB RAM', '$700', 'Available', 'Sale', 'IC004'),
+('MSG00015', 'Dyson Airwrap: Got it from my ex, never used', '$700', 'Available', 'Sale', 'IC004'),
+('MSG00016', 'Biology STPM: Overused', '$3', 'Sold', 'Sale', 'IC007'),
+('MSG00017', 'Iphone 3gs: Doesnt power on, good as a decorative piece', '$60', 'Available', 'Sale', 'IC004'),
+('MSG00018', 'Pearl necklace: About 5mm in length', '$5', 'Sold', 'Sale', 'IC002'),
+('MSG00019', 'Aesop travel pack: Stole it from my hospital where I work at', '$30', 'Available', 'Sale', 'IC008');
 
 --19. Likes
 INSERT INTO Likes (AccID, MessageID)
