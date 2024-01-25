@@ -199,10 +199,10 @@ create table Feedback
 	FbkCatID	char(10)	not null,
 	CondoMgmID	smallint	null,
 
-	constraint PK_Feedback primary key (FbkId),
+	constraint PK_Feedback primary key (FbkID),
 	constraint FK_Feedback_ByAccID foreign key (ByAccID)
 		references Account (AccID),
-	constraint FK_Feedback_FbkCatID foreign key (FbkCatId)
+	constraint FK_Feedback_FbkCatID foreign key (FbkCatID)
 		references FeedbkCat (FbkCatID),
 	constraint FK_Feedback_CondoMgmID foreign key (CondoMgmID)
 		references CondoMgmt (CondoMgmtID),
@@ -420,8 +420,6 @@ create table TempVehLabel
 		('Jovan Tan', '93210987', '2023-01-25', 'C'),
 		('Vijay', '89012123', '2023-07-16', 'T');
 	select * from Staff;
-		
-
 
 --6.Vehicle
 	Insert into Vehicle
@@ -451,7 +449,8 @@ create table TempVehLabel
 --7.Account
 	Insert into Account (AccName, AccAddress, AccCtcNo, AccEmail, CondoID, ApprovedBy)
 	values
-	-- lAST 10 are CondoMgr
+	-- First Condo 9 accounts (Owner --> 2,4,6,8) (Tenant ---> 1,3,5,7,9)
+	--Condo 1--
 	('John Tan', 'Blk 3, 8 Marina Boulevard, #05-118', '87345678', 'john.tan@gmail.com', 'C001', 1),
 	('Steve Smith', 'Blk 4, 8 Marina Boulevard, #06-128', '88654321', 'steve.smith@gmail.com', 'C001', 2),
 	('Virat Kohli', 'Blk 2, 8 Marina Boulevard, #04-108', '86781234', 'virat.kohli@gmail.com', 'C001', 2),
@@ -461,6 +460,9 @@ create table TempVehLabel
 	('Ethan Lim', 'Blk 2, 8 Marina Boulevard, #07-131', '87654321', 'ethan.lim@gmail.com', 'C001', 4),
 	('Selana Gomez', 'Blk 1, 8 Marina Boulevard, #04-110', '83567890', 'selana.gomez@gmail.com', 'C001', 4),
 	('Harry Maguire', 'Blk 7, 8 Marina Boulevard, #07-135', '85432123', 'harry.maguire@gmail.com', 'C001', 5),
+
+	-- Next Condo 9 accounts (Owner --> 10,12,14,16,18) (Tenant ---> 11,13,15,17)
+	--Condo 2--
 	('Rachel Tan', 'Blk 1, 1 King Albert Park, #05-118', '82358765', 'rachel.tan@gmail.com', 'C002', 6),
 	('Alan Walker', 'Blk 1, 1 King Albert Park, #05-120', '87651234', 'alan.walker@gmail.com', 'C002', 6),
 	('Annabelle Chua', 'Blk 2, 1 King Albert Park, #06-128', '84561234', 'annabelle.chua@gmail.com', 'C002', 7),
@@ -470,6 +472,9 @@ create table TempVehLabel
 	('Enzo Tan', 'Blk 4, 1 King Albert Park, #03-105', '81234567', 'enzo.tan@gmail.com', 'C002', 10),
 	('Fu Zheng Yi', 'Blk 5, 1 King Albert Park, #07-135', '82345678', 'fu.zhengyi@gmail.com', 'C002', 10),
 	('Kevin De Bruyne', 'Blk 5, 1 King Albert Park, #07-138', '83456789', 'kevin.debruyne@gmail.com', 'C002', 9),
+
+	-- Next 13 accounts (Owner --> 20,22,24,26,28,30) (Tenant ---> 19,21,23,25,27,29,31)
+	--Condo 3-15--
 	('Tom Holland', 'Blk 1, 1 Lorong 20 Geylang, #05-118', '84567890', 'tom.holland@gmail.com', 'C003', 11),
 	('Bruno Mars', 'Blk 1, 50 - 76 Punggol Walk, #05-120', '87890123', 'bruno.mars@gmail.com', 'C004', 5),
 	('Fandi Ahmed', 'Blk 2, 7 Bishan Street 15, #05-118', '88901234', 'fandi.ahmed@gmail.com', 'C005', 6),
@@ -483,6 +488,17 @@ create table TempVehLabel
     ('Nicholas', 'Blk 4, 2 - 6B Simon Lane, #02-100', '88901254', 'nicholas@gmail.com', 'C013', 12),
     ('Luis', 'Blk 2, 5 Anthony Road, #03-115', '89812345', 'luis@gmail.com', 'C014', 11),
     ('Edric', 'Blk 5, 180 Depot Road, #06-130', '81023356', 'edric@gmail.com', 'C015', 8),
+	--CondoMgmt --> (32,33,34,35,36,37,38,39,40,41)
+	--Condo1 --> 32
+	--Condo2 --> 33
+	--Condo3 --> 34
+	--Condo4 --> 35
+	--Condo5 --> 36
+	--Condo6 --> 37
+	--Condo7 --> 38
+	--Condo8 --> 39
+	--Condo9 --> 40
+	--Condo10 --> 41
 	('HorizonBloom', 'King Albert Park 1', '87624321', 'horizonbloom@example.com','C001',9),
 	('SunRiseTech', 'Raffles Quay 45', '91234597', 'sunrise.tech@example.com','C002',3),
 	('ClearView Innovations', 'Bukit Timah Road 22', '82345671', 'clearview.innov@example.com','C003',2),
@@ -513,36 +529,37 @@ create table TempVehLabel
 --9.Owner
 	Insert Into Owner (OwnerID, OwnStartDate, CheckedBy)
 	Values
+	-- Even AccId are Owenrs
 	(2, '2022-01-01', 32),
 	(4, '2022-02-15', 32),
-	(6, '2022-03-10', 33),
+	(6, '2022-02-10', 33),
 	(8, '2022-04-22', null),
-	(10, '2022-05-05', 35),
+	(10, '2022-04-05', 35),
 	(12, '2022-06-18', 36),
 	(14, '2022-07-02', 36),
-	(16, '2022-08-14', 36),
-	(18, '2022-09-28', null),
+	(16, '2022-06-14', 36),
+	(18, '2022-08-28', null),
 	(20, '2022-10-11', 38),
 	(22, '2022-11-24', 39),
 	(24, '2022-12-07', 39),
-	(26, '2023-01-20', 40),
-	(28, '2023-02-03', 41),
-	(30, '2023-03-17', null);
+	(26, '2022-02-20', 40),
+	(28, '2022-03-03', 41),
+	(30, '2023-07-17', null);
 	Select * from Owner;
 
 --10.Announcement
 	Insert into Announcement (AnnID, AnnText, AnnStartDate, AnnEndDate, CondoMgmID)
 	VALUES
-	('A001', 'Important maintenance notice.', '2023-09-10', '2023-09-30', 32),
-	('A002', 'Upcoming Chinese New Year Celebration on Saturday.', '2024-02-05', '2024-02-06', 32),
+	('A001', 'Important maintenance notice.', '2023-10-10', '2023-10-30', 32),
+	('A002', 'Upcoming Chinese New Year Celebration on Saturday.', '2023-10-05', '2023-10-06', 32),
 	('A003', 'New security measures implemented.', '2024-02-10', '2024-03-01', 32),
-	('A004', 'Reminder: Monthly condo meeting on Friday.', '2024-02-15', '2024-02-15', 33),
-	('A005', 'Pool area maintenance scheduled for next week.', '2023-12-20', '2024-12-25', 33),
-	('A006', 'Changes to parking policy effective immediately.', '2023-11-25', '2024-12-10', 34),
+	('A004', 'Reminder: Monthly condo meeting on Friday.', '2024-02-15', '2024-02-25', 33),
+	('A005', 'Pool area maintenance scheduled for next week.', '2023-12-20', '2023-12-25', 33),
+	('A006', 'Changes to parking policy effective immediately.', '2023-12-25', '2023-12-30', 34),
 	('A007', 'Celebrating our community achievements.', '2024-01-10', '2024-01-15', 34),
-	('A008', 'Emergency contact numbers updated.', '2023-11-05', '2024-11-10', 35),
-	('A009', 'Notice: Water supply disruption on Monday.', '2024-02-10', '2024-02-20', 36),
-	('A010', 'Renovation work in progress. Apologies for inconvenience.', '2024-03-15', '2024-04-01', 37),
+	('A008', 'Emergency contact numbers updated.', '2024-01-05', '2024-01-10', 35),
+	('A009', 'Notice: Water supply disruption on Monday.', '2023-11-10', '2023-11-20', 36),
+	('A010', 'Renovation work in progress. Apologies for inconvenience.', '2023-11-15', '2023-12-01', 37),
 	('A011', 'Fire drill scheduled for this month.', '2024-01-20', '2024-01-21', 38),
 	('A012', 'New fitness classes available. Join us!', '2024-02-25', '2024-04-10', 38),
 	('A013', 'Reminder: Pay your monthly dues by end of the week.', '2024-03-28', '2024-03-31', 39),
@@ -554,36 +571,45 @@ create table TempVehLabel
 	INSERT INTO Facility (FacID, FacName, Deposit, CondoID)
 	VALUES
 	-- F represents Facilty , C represents Condo, so F1C1, means facility 1 in condo 1. 6 facailty for Condo 1,2 rest condo only got 2 facility 
+	-- Condo 1--
 	('F1C1', 'Swimming Pool', NULL, 'C001'),
 	('F2C1', 'Gym', 10.00, 'C001'),
 	('F3C1', 'BBQ Pit Area', 30.00, 'C001'),
 	('F4C1', 'Tennis Court', 10.00, 'C001'),
 	('F5C1', 'Function Room', 50.00, 'C001'),
 	('F6C1', 'Children Playground', NULL, 'C001'),
+	-- Condo 2--
 	('F1C2', 'Swimming Pool', NULL, 'C002'),
 	('F2C2', 'Gym', 12.00, 'C002'),
 	('F3C2', 'BBQ Pit Area', 35.00, 'C002'),
 	('F4C2', 'Tennis Court', 11.00, 'C002'),
 	('F5C2', 'Function Room', 50.00, 'C002'),
 	('F6C2', 'Children Playground', NULL, 'C002'),
+	-- Condo 3--
 	('F1C3', 'Swimming Pool', NULL, 'C003'),
 	('F2C3', 'Gym', 9.00, 'C003'),
 	('F3C3', 'BBQ Pit Area', 30.00, 'C003'),
 	('F4C3', 'Tennis Court', 10.00, 'C003'),
 	('F5C3', 'Function Room', 50.00, 'C003'),
 	('F6C3', 'Children Playground', NULL, 'C003'),
+	--Condo 4--
 	('F1C4', 'Swimming Pool', NULL, 'C004'),
-	('F4C4', 'Tennis Court', 13.00, 'C004'),
-	('F2C5', 'Gym', NULL, 'C005'),
-	('F3C5', 'BBQ Pit Area', 30.00, 'C005'),
+	('F2C4', 'Tennis Court', 13.00, 'C004'),
+	--Condo 5--
+	('F1C5', 'Gym', NULL, 'C005'),
+	('F2C5', 'BBQ Pit Area', 30.00, 'C005'),
+	--Condo 6--
 	('F1C6', 'Swimming Pool', NULL, 'C006'),
-	('F4C6', 'Tennis Court', NULL, 'C006'),
-	('F2C7', 'Gym', NULL, 'C007'),
-	('F3C7', 'BBQ Pit Area', 30.00, 'C007'),
-	('F5C8', 'Function Room', 50.00, 'C008'),
-	('F6C8', 'Children Playground', NULL, 'C008'),
-	('F5C9', 'Function Room', 50.00, 'C009'),
-	('F6C9', 'Children Playground', NULL, 'C009');
+	('F2C6', 'Tennis Court', NULL, 'C006'),
+	--Condo 7--
+	('F1C7', 'Gym', NULL, 'C007'),
+	('F2C7', 'BBQ Pit Area', 30.00, 'C007'),
+	--Condo 8--
+	('F1C8', 'Function Room', 50.00, 'C008'),
+	('F2C8', 'Children Playground', NULL, 'C008'),
+	--Condo 9--
+	('F1C9', 'Function Room', 50.00, 'C009'),
+	('F2C9', 'Children Playground', NULL, 'C009');
 SELECT * From Facility;
 
 --12. FacTimeSlot
@@ -593,18 +619,23 @@ VALUES
 ('F1C1', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F1C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F1C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F2C1', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F2C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F2C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F3C1', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F3C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F3C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F4C1', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F4C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F4C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F5C1', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F5C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F5C1', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F6C1', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F6C1', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F6C1', 3, 'Evening Slot: 6 PM to 12 AM'),
@@ -613,18 +644,23 @@ VALUES
 ('F1C2', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F1C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F1C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F2C2', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F2C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F2C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F3C2', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F3C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F3C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F4C2', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F4C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F4C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F5C2', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F5C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F5C2', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F6C2', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F6C2', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F6C2', 3, 'Evening Slot: 6 PM to 12 AM'),
@@ -633,18 +669,23 @@ VALUES
 ('F1C3', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F1C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F1C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F2C3', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F2C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F2C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F3C3', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F3C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F3C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F4C3', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F4C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F4C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F5C3', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F5C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F5C3', 3, 'Evening Slot: 6 PM to 12 AM'),
+
 ('F6C3', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F6C3', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F6C3', 3, 'Evening Slot: 6 PM to 12 AM'),
@@ -653,49 +694,49 @@ VALUES
 ('F1C4', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F1C4', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F1C4', 3, 'Evening Slot: 6 PM to 12 AM'),
-('F4C4', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F4C4', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F4C4', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F2C4', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C4', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C4', 3, 'Evening Slot: 6 PM to 12 AM'),
 
 -- Time slots for facilities in Condo C005
+('F1C5', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C5', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C5', 3, 'Evening Slot: 6 PM to 12 AM'),
 ('F2C5', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F2C5', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F2C5', 3, 'Evening Slot: 6 PM to 12 AM'),
-('F3C5', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F3C5', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F3C5', 3, 'Evening Slot: 6 PM to 12 AM'),
 
 -- Time slots for facilities in Condo C006
 ('F1C6', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F1C6', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F1C6', 3, 'Evening Slot: 6 PM to 12 AM'),
-('F4C6', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F4C6', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F4C6', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F2C6', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C6', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C6', 3, 'Evening Slot: 6 PM to 12 AM'),
 
 -- Time slots for facilities in Condo C007
+('F1C7', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C7', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C7', 3, 'Evening Slot: 6 PM to 12 AM'),
 ('F2C7', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F2C7', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F2C7', 3, 'Evening Slot: 6 PM to 12 AM'),
-('F3C7', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F3C7', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F3C7', 3, 'Evening Slot: 6 PM to 12 AM'),
 
 -- Time slots for facilities in Condo C008
-('F5C8', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F5C8', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F5C8', 3, 'Evening Slot: 6 PM to 12 AM'),
-('F6C8', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F6C8', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F6C8', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F1C8', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C8', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C8', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F2C8', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C8', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C8', 3, 'Evening Slot: 6 PM to 12 AM'),
 
 -- Time slots for facilities in Condo C009
-('F5C9', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F5C9', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F5C9', 3, 'Evening Slot: 6 PM to 12 AM'),
-('F6C9', 1, 'Morning Slot: 6 AM to 12 PM'),
-('F6C9', 2, 'Afternoon Slot: 12 PM to 6 PM'),
-('F6C9', 3, 'Evening Slot: 6 PM to 12 AM');
+('F1C9', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F1C9', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F1C9', 3, 'Evening Slot: 6 PM to 12 AM'),
+('F2C9', 1, 'Morning Slot: 6 AM to 12 PM'),
+('F2C9', 2, 'Afternoon Slot: 12 PM to 6 PM'),
+('F2C9', 3, 'Evening Slot: 6 PM to 12 AM');
 Select * from FacTimeSlot
 
 --13.BookSlot
@@ -705,41 +746,51 @@ VALUES
 ('F1C1', 1, '2023-09-20', 'A'),
 ('F1C1', 2, '2023-09-20', 'M'),
 ('F1C1', 3, '2023-09-20', 'B'),
-('F2C1', 1, '2023-09-19', 'A'),
-('F2C1', 2, '2023-09-19', 'A'),
-('F2C1', 3, '2023-09-19', 'A'),
-('F3C1', 1, '2023-09-18', 'B'),
-('F3C1', 2, '2023-09-18', 'A'),
-('F3C1', 3, '2023-09-18', 'B'),
+
+('F2C1', 1, '2023-10-19', 'A'),
+('F2C1', 2, '2023-10-19', 'A'),
+('F2C1', 3, '2023-10-19', 'A'),
+
+('F3C1', 1, '2023-11-18', 'B'),
+('F3C1', 2, '2023-11-18', 'A'),
+('F3C1', 3, '2023-11-18', 'B'),
+
 ('F4C1', 1, '2023-09-17', 'A'),
 ('F4C1', 2, '2023-09-17', 'B'),
 ('F4C1', 3, '2023-09-17', 'A'),
-('F5C1', 1, '2023-09-16', 'A'),
-('F5C1', 2, '2023-09-16', 'B'),
-('F5C1', 3, '2023-09-16', 'A'),
-('F6C1', 1, '2023-09-15', 'A'),
-('F6C1', 2, '2023-09-15', 'A'),
-('F6C1', 3, '2023-09-15', 'A'),
+
+('F5C1', 1, '2023-10-16', 'A'),
+('F5C1', 2, '2023-10-16', 'B'),
+('F5C1', 3, '2023-10-16', 'A'),
+
+('F6C1', 1, '2023-11-15', 'A'),
+('F6C1', 2, '2023-11-15', 'A'),
+('F6C1', 3, '2023-11-15', 'A'),
 
 -- Time slots for facilities in Condo C002
 ('F1C2', 1, '2023-09-20', 'B'),
 ('F1C2', 2, '2023-09-20', 'A'),
 ('F1C2', 3, '2023-09-20', 'B'),
-('F2C2', 1, '2023-09-19', 'B'),
-('F2C2', 2, '2023-09-19', 'A'),
-('F2C2', 3, '2023-09-19', 'A'),
-('F3C2', 1, '2023-09-18', 'A'),
-('F3C2', 2, '2023-09-18', 'A'),
-('F3C2', 3, '2023-09-18', 'B'),
+
+('F2C2', 1, '2023-12-19', 'B'),
+('F2C2', 2, '2023-12-19', 'A'),
+('F2C2', 3, '2023-12-19', 'A'),
+
+('F3C2', 1, '2024-01-18', 'A'),
+('F3C2', 2, '2024-01-18', 'A'),
+('F3C2', 3, '2024-01-18', 'B'),
+
 ('F4C2', 1, '2023-09-17', 'B'),
 ('F4C2', 2, '2023-09-17', 'M'),
 ('F4C2', 3, '2023-09-17', 'A'),
-('F5C2', 1, '2023-09-16', 'A'),
-('F5C2', 2, '2023-09-16', 'B'),
-('F5C2', 3, '2023-09-16', 'B'),
-('F6C2', 1, '2023-09-15', 'A'),
-('F6C2', 2, '2023-09-15', 'A'),
-('F6C2', 3, '2023-09-15', 'A'),
+
+('F5C2', 1, '2023-12-16', 'A'),
+('F5C2', 2, '2023-12-16', 'B'),
+('F5C2', 3, '2023-12-16', 'B'),
+
+('F6C2', 1, '2024-01-15', 'A'),
+('F6C2', 2, '2024-01-15', 'A'),
+('F6C2', 3, '2024-01-15', 'A'),
 
 -- Time slots for facilities in Condo C003
 ('F1C3', 1, '2023-09-20', 'A'),
@@ -765,84 +816,95 @@ VALUES
 ('F1C4', 1, '2023-09-20', 'A'),
 ('F1C4', 2, '2023-09-20', 'B'),
 ('F1C4', 3, '2023-09-20', 'M'),
-('F4C4', 1, '2023-09-19', 'A'),
-('F4C4', 2, '2023-09-19', 'B'),
-('F4C4', 3, '2023-09-19', 'A'),
+('F2C4', 1, '2023-09-19', 'A'),
+('F2C4', 2, '2023-09-19', 'B'),
+('F2C4', 3, '2023-09-19', 'A'),
 
 -- Time slots for facilities in Condo C005
-('F2C5', 1, '2023-09-20', 'M'),
-('F2C5', 2, '2023-09-20', 'B'),
-('F2C5', 3, '2023-09-20', 'A'),
-('F3C5', 1, '2023-09-19', 'B'),
-('F3C5', 2, '2023-09-19', 'A'),
-('F3C5', 3, '2023-09-19', 'B'),
+('F1C5', 1, '2023-09-20', 'M'),
+('F1C5', 2, '2023-09-20', 'B'),
+('F1C5', 3, '2023-09-20', 'A'),
+('F2C5', 1, '2023-09-19', 'B'),
+('F2C5', 2, '2023-09-19', 'A'),
+('F2C5', 3, '2023-09-19', 'B'),
 
 -- Time slots for facilities in Condo C006
 ('F1C6', 1, '2023-09-20', 'B'),
 ('F1C6', 2, '2023-09-20', 'A'),
 ('F1C6', 3, '2023-09-20', 'M'),
-('F4C6', 1, '2023-09-19', 'A'),
-('F4C6', 2, '2023-09-19', 'B'),
-('F4C6', 3, '2023-09-19', 'A'),
+('F2C6', 1, '2023-09-19', 'A'),
+('F2C6', 2, '2023-09-19', 'B'),
+('F2C6', 3, '2023-09-19', 'A'),
 
 -- Time slots for facilities in Condo C007
-('F2C7', 1, '2023-09-20', 'A'),
-('F2C7', 2, '2023-09-20', 'M'),
-('F2C7', 3, '2023-09-20', 'A'),
-('F3C7', 1, '2023-09-19', 'A'),
-('F3C7', 2, '2023-09-19', 'B'),
-('F3C7', 3, '2023-09-19', 'A'),
+('F1C7', 1, '2023-09-20', 'A'),
+('F1C7', 2, '2023-09-20', 'M'),
+('F1C7', 3, '2023-09-20', 'A'),
+('F2C7', 1, '2023-09-19', 'A'),
+('F2C7', 2, '2023-09-19', 'B'),
+('F2C7', 3, '2023-09-19', 'A'),
 
 -- Time slots for facilities in Condo C008
-('F5C8', 1, '2023-09-20', 'A'),
-('F5C8', 2, '2023-09-20', 'B'),
-('F5C8', 3, '2023-09-20', 'B'),
-('F6C8', 1, '2023-09-19', 'B'),
-('F6C8', 2, '2023-09-19', 'B'),
-('F6C8', 3, '2023-09-19', 'M'),
+('F1C8', 1, '2023-09-20', 'A'),
+('F1C8', 2, '2023-09-20', 'B'),
+('F1C8', 3, '2023-09-20', 'B'),
+('F2C8', 1, '2023-09-19', 'B'),
+('F2C8', 2, '2023-09-19', 'B'),
+('F2C8', 3, '2023-09-19', 'M'),
 
 -- Time slots for facilities in Condo C009
-('F5C9', 1, '2023-09-20', 'B'),
-('F5C9', 2, '2023-09-20', 'A'),
-('F5C9', 3, '2023-09-20', 'B'),
-('F6C9', 1, '2023-09-19', 'A'),
-('F6C9', 2, '2023-09-19', 'B'),
-('F6C9', 3, '2023-09-19', 'M')
+('F1C9', 1, '2023-09-20', 'B'),
+('F1C9', 2, '2023-09-20', 'A'),
+('F1C9', 3, '2023-09-20', 'B'),
+('F2C9', 1, '2023-09-19', 'A'),
+('F2C9', 2, '2023-09-19', 'B'),
+('F2C9', 3, '2023-09-19', 'M')
 select * from BookSlot
 
 --14.Booking
 INSERT INTO Booking (BookingID, BookingDate, BookingStatus, AccID, FacID, TimeSlotSn, SlotDate)
 VALUES
 -- Account(1-9 in Condo 1 booked for facilty that are available in condo 1)
-('B1C001', '2023-08-20', 'PP', 1, 'F1C1', 1, '2023-09-20'),
-('B3C001', '2023-08-19', 'CF', 5, 'F1C1', 3, '2023-09-20'),
-('B4C001', '2023-08-18', 'PP', 1, 'F2C1', 1, '2023-09-19'),
-('B5C001', '2023-08-18', 'CC', 2, 'F2C1', 2, '2023-09-19'),
-('B6C001', '2023-08-18', 'PP', 4, 'F2C1', 3, '2023-09-19'),
-('B7C001', '2023-08-17', 'CF', 7, 'F3C1', 1, '2023-09-18'),
-('B8C001', '2023-08-17', 'PP', 9, 'F3C1', 2, '2023-09-18'),
-('B9C001', '2023-08-16', 'CF', 1, 'F3C1', 3, '2023-09-18'),
-('B10C001', '2023-08-12', 'PP', 2, 'F4C1', 1, '2023-09-17'),
-('B11C001', '2023-07-12', 'CF', 8, 'F4C1', 2, '2023-09-17'),
-('B12C001', '2023-07-12', 'CC', 6, 'F4C1', 3, '2023-09-17'),
-('B13C001', '2023-07-11', 'PP', 4, 'F5C1', 1, '2023-09-16'),
-('B14C001', '2023-06-11', 'CF', 3, 'F5C1', 2, '2023-09-16'),
-('B15C001', '2023-05-11', 'PP', 5, 'F5C1', 3, '2023-09-16'),
+-- Swimmig pool booked mostly one day before booking
+('B1C001', '2023-09-18', 'PP', 1, 'F1C1', 1, '2023-09-20'),
+('B3C001', '2023-09-19', 'CF', 5, 'F1C1', 3, '2023-09-20'),
+--Gym mostly booked one day before booking.
+('B4C001', '2023-10-17', 'PP', 1, 'F2C1', 1, '2023-10-19'),
+('B5C001', '2023-10-18', 'CC', 2, 'F2C1', 2, '2023-10-19'),
+('B6C001', '2023-10-16', 'PP', 4, 'F2C1', 3, '2023-10-19'),
+--BBQ Pit Area booked 1 week ago before booking
+('B7C001', '2023-11-11', 'CF', 7, 'F3C1', 1, '2023-11-18'),
+('B8C001', '2023-11-10', 'PP', 9, 'F3C1', 2, '2023-11-18'),
+('B9C001', '2023-11-09', 'CF', 1, 'F3C1', 3, '2023-11-18'),
+--Tennis Court mostly booked two day before booking.
+('B10C001', '2023-09-15', 'PP', 2, 'F4C1', 1, '2023-09-17'),
+('B11C001', '2023-09-16', 'CF', 8, 'F4C1', 2, '2023-09-17'),
+('B12C001', '2023-09-14', 'CC', 6, 'F4C1', 3, '2023-09-17'),
+--Function room mostly booked one month before booking.
+('B13C001', '2023-09-11', 'PP', 4, 'F5C1', 1, '2023-10-16'),
+('B14C001', '2023-09-15', 'CF', 3, 'F5C1', 2, '2023-10-16'),
+('B15C001', '2023-09-10', 'PP', 5, 'F5C1', 3, '2023-10-16'),
+
 -- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
-('B1C002', '2023-08-20', 'CF', 11, 'F1C2', 1, '2023-09-20'),
-('B2C002', '2023-08-19', 'PP', 13, 'F1C2', 2, '2023-09-20'),
-('B3C002', '2023-08-18', 'CF', 15, 'F1C2', 3, '2023-09-20'),
-('B4C002', '2023-08-18', 'CF', 11, 'F2C2', 1, '2023-09-19'),
-('B5C002', '2023-08-16', 'PP', 12, 'F2C2', 2, '2023-09-19'),
-('B6C002', '2023-08-16', 'CC', 14, 'F2C2', 3, '2023-09-19'),
-('B7C002', '2023-08-15', 'PP', 17, 'F3C2', 1, '2023-09-18'),
-('B8C002', '2023-08-15', 'CC', 15, 'F3C2', 2, '2023-09-18'),
-('B9C002', '2023-07-14', 'CF', 11, 'F3C2', 3, '2023-09-18'),
+-- Swimmig pool booked mostly one day before booking
+('B1C002', '2023-09-18', 'CF', 11, 'F1C2', 1, '2023-09-20'),
+('B2C002', '2023-09-19', 'PP', 13, 'F1C2', 2, '2023-09-20'),
+('B3C002', '2023-09-17', 'CF', 15, 'F1C2', 3, '2023-09-20'),
+--Gym mostly booked one day before booking.
+('B4C002', '2023-10-18', 'CF', 11, 'F2C2', 1, '2023-10-19'),
+('B5C002', '2023-10-16', 'PP', 12, 'F2C2', 2, '2023-10-19'),
+('B6C002', '2023-10-17', 'CC', 14, 'F2C2', 3, '2023-10-19'),
+--BBQ Pit Area booked 1 week ago before booking
+('B7C002', '2024-01-07', 'PP', 17, 'F3C2', 1, '2024-01-18'),
+('B8C002', '2024-01-10', 'CC', 15, 'F3C2', 2, '2024-01-18'),
+('B9C002', '2023-12-31', 'CF', 11, 'F3C2', 3, '2024-01-18'),
+--Tennis Court mostly booked two day before booking.
 ('B10C002', '2023-07-13', 'CF', 12, 'F4C2', 1, '2023-09-17'),
 ('B12C002', '2023-07-13', 'PP', 16, 'F4C2', 3, '2023-09-17'),
-('B13C002', '2023-02-13', 'PP', 14, 'F5C2', 1, '2023-09-16'),
-('B14C002', '2023-02-12', 'CF', 13, 'F5C2', 2, '2023-09-16'),
-('B15C002', '2023-02-12', 'CF', 15, 'F5C2', 3, '2023-09-16');
+--Function room mostly booked one month before booking.
+('B13C002', '2023-11-22', 'PP', 14, 'F5C2', 1, '2023-12-16'),
+('B14C002', '2023-11-15', 'CF', 13, 'F5C2', 2, '2023-12-16'),
+('B15C002', '2023-11-17', 'CF', 15, 'F5C2', 3, '2023-12-16');
 -- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
 
 Select * from Booking;
@@ -850,40 +912,56 @@ Select * from Booking;
 --15. Feedback
 INSERT INTO Feedback (FbkID, FbkDesc, FbkDateTime, FbkStatus, ByAccID, FbkCatID, CondoMgmID)
 VALUES
-('FBK001', 'The hallway on the 3rd floor is not properly cleaned.', '2023-03-01 10:00:00', 'S', 5, 'FC001', 32),
-('FBK002', 'The security gate is malfunctioning frequently.', '2023-03-02 15:30:00', 'P', 12, 'FC002', 32),
+('FBK001', 'The hallway on the 3rd floor is not properly cleaned.', '2023-03-01 10:00:00', 'S', 5, 'FC001', Null),
+('FBK002', 'The security gate is malfunctioning frequently.', '2023-03-02 15:30:00', 'A', 12, 'FC002', 32),
 ('FBK003', 'Leaky faucet in the community gym restroom.', '2023-03-03 09:00:00', 'S', 7, 'FC003', NULL),
 ('FBK004', 'Cracks observed on the sidewall of building B.', '2023-03-04 14:20:00', 'P', 15, 'FC004', 33),
 ('FBK005', 'Parking lot line markings are faded and need repainting.', '2023-03-05 13:00:00', 'S', 20, 'FC005', NULL),
-('FBK006', 'Loud music from apartment 5B during late-night hours.', '2023-03-06 22:00:00', 'P', 9, 'FC006', 34),
-('FBK007', 'Broken equipment in the fitness center.', '2023-03-07 16:45:00', 'S', 18, 'FC007', 35),
-('FBK008', 'Littering around the community playground.', '2023-03-08 11:30:00', 'P', 22, 'FC001', NULL),
-('FBK009', 'Elevator doors closing too quickly, posing a safety hazard.', '2023-03-09 17:15:00', 'S', 25, 'FC008', 36),
+('FBK006', 'Loud music from apartment 5B during late-night hours.', '2023-03-06 22:00:00', 'A', 9, 'FC006', 34),
+('FBK007', 'Broken equipment in the fitness center.', '2023-03-07 16:45:00', 'S', 18, 'FC007', Null),
+('FBK008', 'Littering around the community playground.', '2023-03-08 11:30:00', 'A', 22, 'FC001', 35),
+('FBK009', 'Elevator doors closing too quickly, posing a safety hazard.', '2023-03-09 17:15:00', 'S', 25, 'FC008', Null),
 ('FBK010', 'Inadequate lighting in the rear parking area.', '2023-03-10 20:50:00', 'P', 30, 'FC005', 37);
 Select * from Feedback
 
 --16. Message
 INSERT INTO Message (MsgID, Msgtext, Msgtype, PostedBy, ReplyTo)
 VALUES
+--Question01--
 ('MSG00001', 'Looking for a jogging partner in our community. Anyone interested?', 'F', 5, NULL), 
-('MSG00002', 'Hosting a garage sale this Saturday at Block 3. Lots of kids’ items and books!', 'G', 12, NULL),
-('MSG00003', 'Can anyone recommend a reliable handyman for some minor repairs?', 'C', 15, NULL), 
-('MSG00004', 'Lost dog spotted near the community park. Seems friendly. Please check if it’s yours.', 'C', 7, 'MSG00002'), 
+--Question02--
+('MSG00002', 'Hosting a garage sale this Saturday at Block 3. Lots of kids’ items and books!', 'G', 12,NULL ),
+--Reply03--
+('MSG00003', 'Sure i will take part in the project', 'C', 15, 'MSG00005'), 
+
+('MSG00004', 'Lost dog spotted near the community park. Seems friendly. Please check if it’s yours.', 'C', 7, NULL), 
+--Question03--
 ('MSG00005', 'Interested in starting a community garden project. Who wants to join?', 'C', 22, NULL),
-('MSG00006', 'Selling a gently used coffee table. DM for pictures and details.', 'G', 30, NULL), 
-('MSG00007', 'Anyone up for a weekly board game night at the clubhouse?', 'F', 2, NULL), 
+--Reply02--
+('MSG00006', 'What time is the event', 'G', 30, 'MSG00002'), 
+--Reply01--
+('MSG00007', 'Im free from 4-6, lets link up!', 'F', 2,'MSG00001' ), 
+
 ('MSG00008', 'Reminder: Don’t forget to vote in the condo board elections this Friday.', 'C', 9, NULL), 
+--Question04--
 ('MSG00009', 'Looking for a tennis partner. I’m an intermediate player hoping to play on weekends.', 'F', 18, NULL),
-('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, NULL),
-('MSG00011', 'Selling an unopened Tom Ford Oud EDP for men', 'G', 8, NULL), 
-('MSG00012', 'Looking to let go of my used Ralph Lauren half zipper', 'G', 21, NULL),
+
+('MSG00010', 'For sale: Vintage record player in great condition. Message if interested.', 'G', 25, null),
+--Question05--
+('MSG00011', 'Selling an unopened Tom Ford Oud EDP for men', 'G', 8, null), 
+--Reply05--
+('MSG00012', 'How long did you have it?', 'G', 21, 'MSG00011'),
+
 ('MSG00013', 'Letting go of a prevloved Nintendo switch console', 'G', 17, NULL),
 ('MSG00014', '15 inch MacBook Pro 2013 up for sale', 'G', 25, NULL),
+--Question06--
 ('MSG00015', 'Selling an unused Dyson AirWrap', 'G', 24, NULL),
-('MSG00016', 'Letting go off my old science book', 'G', 14, NULL),
+--Reply06--
+('MSG00016', 'Is the warranty still valid?', 'G', 14,'MSG00015' ),
 ('MSG00017', 'Preloved Iphone 3gs', 'G', 28, NULL),
 ('MSG00018', 'Cute pearl necklace for sale', 'G', 30, NULL),
-('MSG00019', 'Aesop travel pack to let go', 'G', 16, NULL);
+--Reply04--
+('MSG00019', 'Have you booked the tennis court?', 'F', 16, 'MSG00009');
 
 
 Select * from Message
@@ -899,10 +977,7 @@ VALUES
 ('MSG00002', 'Photo 1'),
 ('MSG00002', 'Photo 2'),
 ('MSG00002', 'Photo 3'),
---	Photos for Message 3
-('MSG00003', 'Photo 1'),
-('MSG00003', 'Photo 2'),
-('MSG00003', 'Photo 3'),
+
 --	Photos for Message 4
 ('MSG00004', 'Photo 1'),
 ('MSG00004', 'Photo 2'),
@@ -915,10 +990,6 @@ VALUES
 ('MSG00006', 'Photo 1'),
 ('MSG00006', 'Photo 2'),
 ('MSG00006', 'Photo 3'),
---	Photos for Message 7
-('MSG00007', 'Photo 1'),
-('MSG00007', 'Photo 2'),
-('MSG00007', 'Photo 3'),
 --	Photos for Message 8
 ('MSG00008', 'Photo 1'),
 ('MSG00008', 'Photo 2'),
@@ -939,9 +1010,9 @@ VALUES
 ('MSG00015', 'Photo 1'),
 ('MSG00016', 'Photo 1'),
 ('MSG00017', 'Photo 1'),
-('MSG00018', 'Photo 1'),
-('MSG00019', 'Photo 1');
-select * from ItemPhoto
+('MSG00018', 'Photo 1')
+
+select * from ItemPhoto;
 
 --18. ItemRelated
 INSERT INTO ItemRelated (ItemID, ItemDesc, ItemPrice, ItemStatus,SaleOrRent, ItemCatID)
@@ -956,8 +1027,8 @@ VALUES
 ('MSG00015', 'Dyson Airwrap: Got it from my ex, never used', '$700', 'Available', 'Sale', 'IC004'),
 ('MSG00016', 'Biology STPM: Overused', '$3', 'Sold', 'Sale', 'IC007'),
 ('MSG00017', 'Iphone 3gs: Doesnt power on, good as a decorative piece', '$60', 'Available', 'Sale', 'IC004'),
-('MSG00018', 'Pearl necklace: About 5mm in length', '$5', 'Sold', 'Sale', 'IC002'),
-('MSG00019', 'Aesop travel pack: Stole it from my hospital where I work at', '$30', 'Available', 'Sale', 'IC008');
+('MSG00018', 'Pearl necklace: About 5mm in length', '$5', 'Sold', 'Sale', 'IC002')
+
 
 --19. Likes
 INSERT INTO Likes (AccID, MessageID)
@@ -980,21 +1051,23 @@ select * from Likes
 --20. Tenant
 INSERT INTO Tenant (TenantID, ContactStartDate, ContactEndDate, VerifiedBy)
 VALUES
+--Tenant ID Condo 1(Odd numbers of Account ID ---> (1,3,5,7,9)
 (1, '2023-1-10', '2027-3-10', 32),
-(2, '2023-2-10', '2027-2-10', 33),
-(3, '2023-3-10', '2027-1-10', 34),
-(4, '2023-4-10', '2026-12-10', null),
-(5, '2023-5-10', '2026-11-10', 36),
-(6, '2023-6-10', '2026-10-10', 37),
-(7, '2023-7-10', '2026-9-10', 37),
-(8, '2023-8-10', '2026-8-10', null),
-(9, '2023-9-10', '2026-7-10', 37),
-(10, '2023-10-10', '2026-6-10', null),
-(11, '2023-11-10', '2026-5-10', 38),
-(12, '2023-12-10', '2026-4-10', 38),
-(13, '2024-1-10', '2026-3-10', 39),
-(14, '2024-2-10', '2026-2-10', 40),
-(15, '2023-3-10', '2026-1-10', 41)
+(3, '2023-2-10', '2027-2-10', 33),
+(5, '2023-3-10', '2027-1-10', 34),
+(7, '2023-4-10', '2026-12-10', null),
+(9, '2023-5-10', '2026-11-10', 36),
+--Tenant ID Condo 2(Odd numbers of Account ID ---> (11,13,15,17)
+(11, '2023-6-10', '2026-10-10', 37),
+(13, '2023-7-10', '2026-9-10', 37),
+(15, '2023-8-10', '2026-8-10', null),
+(17, '2023-9-10', '2026-7-10', 37),
+(19, '2023-10-10', '2026-6-10', null),
+(21, '2023-11-10', '2026-5-10', 38),
+(23, '2023-12-10', '2026-4-10', 38),
+(25, '2024-1-10', '2026-3-10', 39),
+(27, '2024-2-10', '2026-2-10', 40),
+(29, '2023-3-10', '2026-1-10', 41)
 select * from Tenant
 
 --21. UsefulContact
@@ -1021,7 +1094,7 @@ VALUES
 ('UC00019', 'Zhi En',		'Dental',			'12344321', 'CC001'),
 ('UC00020', 'Zack',			'Food',				'56788765', 'CC002');
 
-SELECT * FROM UsefulContact;
+SELECT * FROM UsefulContact;
 
 --22. CondoUseFulContact
 INSERT INTO CondoUsefulContact (CondoId, UsefulCtcID)
@@ -1057,11 +1130,11 @@ VALUES
 ('VL00004', 'A', 'VN00004', 'V00002', 9, 36),
 ('VL00005', 'A', 'VN00005', 'V00006', 2, 35),	
 ('VL00006', 'A', 'VN00006', 'V00014', 7, 40),	
-('VL00007', 'P', 'VN00007', 'V00004', 8, 34),	
+('VL00007', 'P', 'VN00007', 'V00004', 8, null),	
 ('VL00008', 'R', 'VN00008', 'V00010', 22, 38),	
-('VL00009', 'P', 'VN00009', 'V00003', 17, 36),	
+('VL00009', 'P', 'VN00009', 'V00003', 17, null),	
 ('VL00010', 'A', 'VN00010', 'V00009', 21, 37),	
-('VL00011', 'P', 'VN00011', 'V00005', 12, 33),	
+('VL00011', 'P', 'VN00011', 'V00005', 12, null),	
 ('VL00012', 'A', 'VN00012', 'V00017', 23, 36),	
 ('VL00013', 'A', 'VN00013', 'V00013', 27, 40),	
 ('VL00014', 'A', 'VN00014', 'V00010', 18, 39),	
@@ -1122,3 +1195,4 @@ Notes:  Last 10 of account is condomgmt
 
 */
 ---------------STOP HERE-----------------------------------------
+`
