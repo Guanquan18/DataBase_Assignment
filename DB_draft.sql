@@ -1,6 +1,7 @@
+CREATE DATABASE DBFinal;
+
 
 -- Switch to the new database
---USE db_Assignment_my_own;
 /*	start with Tables with no foreign key	*/
 
 --1. (Table 5)
@@ -43,7 +44,7 @@ create table ItemCategory
 --5. (Table 19)
 create table Staff
 (
-	StaffID			smallint IDENTITY(1,1) not null,
+	StaffID			char(10) not null,
 	StaffName		varchar(50)	not null,
 	StaffContactNo	char(8)		not null	unique,
 	StaffDateJoined	date		not null	default(getdate()),
@@ -75,7 +76,7 @@ create table Account
 	AccCtcNo	char(8)			null		unique,
 	AccEmail	varchar(50)		not null	unique,
 	CondoID		char(10)		not null,
-	ApprovedBy	smallint		not null,
+	ApprovedBy	char(10)		not null,
 	
 	constraint PK_Account primary key (AccID),
 	constraint FK_Account_CondoID foreign key (CondoID) 
@@ -88,7 +89,7 @@ create table Account
 
 create table CondoMgmt
 (
-	CondoMgmtID		smallint,
+	CondoMgmtID		smallint not null,
 	ContactPerson	varchar(100)	not null,
 	CtcPersonMobile	char(8)			not null	unique,
 
@@ -343,6 +344,7 @@ create table TempVehLabel
 	constraint CK_TempVehLabel_TempExpiryDate check(TempExpiryDate>=TempStartDate),
 )
 
+
 /* Inserting values for tables */
 -- 1. Condo
 	Insert into Condo 
@@ -361,8 +363,7 @@ create table TempVehLabel
 		('C012', 'Bartley Grove Apartments',' 9A - 23D Bartley Road, Singapore'),
 		('C013', 'Bliss @ Kovan','2 - 6B Simon Lane, Singapore'),
 		('C014', 'Orchard Scotts Residences', '5 Anthony Road, Singapore'),
-		('C015', 'The Interlace', '180 Depot Road, Singapore')
-		select * from Condo
+		('C015', 'The Interlace', '180 Depot Road, Singapore');
 
 --2. ContactCat
 	Insert into ContactCat
@@ -372,8 +373,7 @@ create table TempVehLabel
 		('CC003', 'Maintenance'),
 		('CC004', 'Community Services'),
 		('CC005', 'Amenties'),
-		('CC006', 'Others')
-	select * from ContactCat;
+		('CC006', 'Others');
 
 --3.FeedbkCat
 	Insert into FeedbkCat
@@ -385,8 +385,7 @@ create table TempVehLabel
 		('FC005', 'Parking'),
 		('FC006', 'Noise Complaints'),
 		('FC007', 'Amenities'),
-		('FC008', 'Others')
-	select * from FeedbkCat;
+		('FC008', 'Others');
 
 --4.ItemCategory
 	Insert INTO ItemCategory
@@ -398,28 +397,26 @@ create table TempVehLabel
 		('IC005', 'Sports and Outdoors'),
 		('IC006', 'Toys and Games'),
 		('IC007', 'Books'),
-		('IC008', 'Others')
-	select * from ItemCategory;
+		('IC008', 'Others');
 
 --5.Staff
-	Insert into staff(StaffName,StaffContactNo,StaffDateJoined,StaffRole)
-	values
-		('S.Sairam','94556614','2020-01-12','A'),
-		('Chang Guan Qaun','91234567','2019-03-21','C'),
-		('Keshwindren', '82345678', '2021-06-14', 'T'),
-		('Jeremy Sim', '84561289', '2018-08-15', 'A'),
-		('Lirone Lim', '83124675', '2018-02-27', 'T'),
-		('Kedric Yeo', '87654321', '2022-07-23', 'T'),
-		('David Yee', '84327890', '2020-04-24', 'A'),
-		('Jerrell Lim', '86543210', '2021-03-21', 'C'),
-		('Arthur Wang', '96789012', '2019-08-20', 'T'),
-		('Jadan Sancho', '84121090', '2021-06-11', 'A'),
-		('Lionel Messi', '97890123', '2020-02-12', 'C'),
-		('Cristiano Ronaldo', '83411098', '2021-04-13', 'A'),
-		('Pey Zhi Xun', '88911234', '2023-01-24', 'A'),
-		('Jovan Tan', '93210987', '2023-01-25', 'C'),
-		('Vijay', '89012123', '2023-07-16', 'T');
-	select * from Staff;
+	INSERT INTO Staff (StaffID, StaffName, StaffContactNo, StaffDateJoined, StaffRole)
+	VALUES
+    ('S001', 'S.Sairam', '94556614', '2020-01-12', 'A'),
+    ('S002', 'Chang Guan Qaun', '91234567', '2019-03-21', 'C'),
+    ('S003', 'Keshwindren', '82345678', '2021-06-14', 'T'),
+    ('S004', 'Jeremy Sim', '84561289', '2018-08-15', 'A'),
+    ('S005', 'Lirone Lim', '83124675', '2018-02-27', 'T'),
+    ('S006', 'Kedric Yeo', '87654321', '2022-07-23', 'T'),
+    ('S007', 'David Yee', '84327890', '2020-04-24', 'A'),
+    ('S008', 'Jerrell Lim', '86543210', '2021-03-21', 'C'),
+    ('S009', 'Arthur Wang', '96789012', '2019-08-20', 'T'),
+    ('S010', 'Jadan Sancho', '84121090', '2021-06-11', 'A'),
+    ('S011', 'Lionel Messi', '97890123', '2020-02-12', 'C'),
+    ('S012', 'Cristiano Ronaldo', '83411098', '2021-04-13', 'A'),
+    ('S013', 'Pey Zhi Xun', '88911234', '2023-01-24', 'A'),
+    ('S014', 'Jovan Tan', '93210987', '2023-01-25', 'C'),
+    ('S015', 'Vijay', '89012123', '2023-07-16', 'T');
 
 --6.Vehicle
 	Insert into Vehicle
@@ -442,52 +439,49 @@ create table TempVehLabel
 		('V00016', 'IU99729173', 'OW', 'Porsche', '911 Carrera'),
 		('V00017', 'IU55828173', 'OW', 'Renault', 'Captur'),
 		('V00018', 'IU72790012', 'RT', 'Honda', 'City');
-
-	SELECT * from Vehicle
-
 	
 --7.Account
 	Insert into Account (AccName, AccAddress, AccCtcNo, AccEmail, CondoID, ApprovedBy)
 	values
 	-- First Condo 9 accounts (Owner --> 2,4,6,8) (Tenant ---> 1,3,5,7,9)
 	--Condo 1--
-	('John Tan', 'Blk 3, 8 Marina Boulevard, #05-118', '87345678', 'john.tan@gmail.com', 'C001', 1),
-	('Steve Smith', 'Blk 4, 8 Marina Boulevard, #06-128', '88654321', 'steve.smith@gmail.com', 'C001', 2),
-	('Virat Kohli', 'Blk 2, 8 Marina Boulevard, #04-108', '86781234', 'virat.kohli@gmail.com', 'C001', 2),
-	('Dwayne Johnson', 'Blk 3, 8 Marina Boulevard, #05-115', '81218765', 'dwayne.johnson@gmail.com', 'C001', 1),
-	('Taylor Swift', 'Blk 6, 8 Marina Boulevard, #03-101', '98765432', 'taylor.swift@gmail.com', 'C001', 1),
-	('Lious Teo', 'Blk 5, 8 Marina Boulevard, #06-130', '80321678', 'lious.teo@gmail.com', 'C001', 3),
-	('Ethan Lim', 'Blk 2, 8 Marina Boulevard, #07-131', '87654321', 'ethan.lim@gmail.com', 'C001', 4),
-	('Selana Gomez', 'Blk 1, 8 Marina Boulevard, #04-110', '83567890', 'selana.gomez@gmail.com', 'C001', 4),
-	('Harry Maguire', 'Blk 7, 8 Marina Boulevard, #07-135', '85432123', 'harry.maguire@gmail.com', 'C001', 5),
+	('John Tan', 'Blk 3, 8 Marina Boulevard, #05-118', '87345678', 'john.tan@gmail.com', 'C001', 'S010'),
+	('Steve Smith', 'Blk 4, 8 Marina Boulevard, #06-128', '88654321', 'steve.smith@gmail.com', 'C001', 'S002'),
+	('Virat Kohli', 'Blk 2, 8 Marina Boulevard, #04-108', '86781234', 'virat.kohli@gmail.com', 'C001', 'S011'),
+	('Dwayne Johnson', 'Blk 3, 8 Marina Boulevard, #05-115', '81218765', 'dwayne.johnson@gmail.com', 'C001', 'S011'),
+	('Taylor Swift', 'Blk 6, 8 Marina Boulevard, #03-101', '98765432', 'taylor.swift@gmail.com', 'C001', 'S009'),
+	('Lious Teo', 'Blk 5, 8 Marina Boulevard, #06-130', '80321678', 'lious.teo@gmail.com', 'C001', 'S008'),
+	('Ethan Lim', 'Blk 2, 8 Marina Boulevard, #07-131', '87654321', 'ethan.lim@gmail.com', 'C001', 'S007'),
+	('Selana Gomez', 'Blk 1, 8 Marina Boulevard, #04-110', '83567890', 'selana.gomez@gmail.com', 'C001', 'S006'),
+	('Harry Maguire', 'Blk 7, 8 Marina Boulevard, #07-135', '85432123', 'harry.maguire@gmail.com', 'C001','S005'),
 
 	-- Next Condo 9 accounts (Owner --> 10,12,14,16,18) (Tenant ---> 11,13,15,17)
 	--Condo 2--
-	('Rachel Tan', 'Blk 1, 1 King Albert Park, #05-118', '82358765', 'rachel.tan@gmail.com', 'C002', 6),
-	('Alan Walker', 'Blk 1, 1 King Albert Park, #05-120', '87651234', 'alan.walker@gmail.com', 'C002', 6),
-	('Annabelle Chua', 'Blk 2, 1 King Albert Park, #06-128', '84561234', 'annabelle.chua@gmail.com', 'C002', 7),
-	('Sophia', 'Blk 2, 1 King Albert Park, #06-138', '86782341', 'sophia@gmail.com', 'C002', 7),
-	('Chairmaine', 'Blk 3, 1 King Albert Park, #04-115', '87891234', 'chairmaine@gmail.com', 'C002', 8),
-	('Bryan Lim', 'Blk 4, 1 King Albert Park, #03-108', '87892234', 'bryan.lim@gmail.com', 'C002', 8),
-	('Enzo Tan', 'Blk 4, 1 King Albert Park, #03-105', '81234567', 'enzo.tan@gmail.com', 'C002', 10),
-	('Fu Zheng Yi', 'Blk 5, 1 King Albert Park, #07-135', '82345678', 'fu.zhengyi@gmail.com', 'C002', 10),
-	('Kevin De Bruyne', 'Blk 5, 1 King Albert Park, #07-138', '83456789', 'kevin.debruyne@gmail.com', 'C002', 9),
+	('Rachel Tan', 'Blk 1, 1 King Albert Park, #05-118', '82358765', 'rachel.tan@gmail.com', 'C002', 'S001'),
+	('Alan Walker', 'Blk 1, 1 King Albert Park, #05-120', '87651234', 'alan.walker@gmail.com', 'C002', 'S009'),
+	('Annabelle Chua', 'Blk 2, 1 King Albert Park, #06-128', '84561234', 'annabelle.chua@gmail.com', 'C002', 'S007'),
+	('Sophia', 'Blk 2, 1 King Albert Park, #06-138', '86782341', 'sophia@gmail.com', 'C002', 'S003'),
+	('Chairmaine', 'Blk 3, 1 King Albert Park, #04-115', '87891234', 'chairmaine@gmail.com', 'C002', 'S002'),
+	('Bryan Lim', 'Blk 4, 1 King Albert Park, #03-108', '87892234', 'bryan.lim@gmail.com', 'C002', 'S004'),
+	('Enzo Tan', 'Blk 4, 1 King Albert Park, #03-105', '81234567', 'enzo.tan@gmail.com', 'C002', 'S015'),
+	('Fu Zheng Yi', 'Blk 5, 1 King Albert Park, #07-135', '82345678', 'fu.zhengyi@gmail.com', 'C002', 'S005'),
+	('Kevin De Bruyne', 'Blk 5, 1 King Albert Park, #07-138', '83456789', 'kevin.debruyne@gmail.com', 'C002', 'S002'),
 
 	-- Next 13 accounts (Owner --> 20,22,24,26,28,30) (Tenant ---> 19,21,23,25,27,29,31)
 	--Condo 3-15--
-	('Tom Holland', 'Blk 1, 1 Lorong 20 Geylang, #05-118', '84567890', 'tom.holland@gmail.com', 'C003', 11),
-	('Bruno Mars', 'Blk 1, 50 - 76 Punggol Walk, #05-120', '87890123', 'bruno.mars@gmail.com', 'C004', 5),
-	('Fandi Ahmed', 'Blk 2, 7 Bishan Street 15, #05-118', '88901234', 'fandi.ahmed@gmail.com', 'C005', 6),
-	('Iqball', 'Blk 3, 8 Kitchener Link, #06-133', '82134567', 'iqball@gmail.com', 'C006', 12),
-	('Elysaa', 'Blk 7, 116-122 Serangoon Aveneue 3, #02-100', '83245678', 'elysaa@gmail.com', 'C007', 9),
-	('Keefe Chua', 'Blk 5, 21 McCallum Street, #05-120', '81224567', 'keefe.chua@gmail.com', 'C008', 8),
-    ('Eugene', 'Blk 5, Hougnag Avenue 6, #05-118', '83456889', 'eugene@gmail.com', 'C009', 13),
-    ('Marcus', 'Blk 2, 28 Beach Road, #06-128', '85678902', 'marcus@gmail.com', 'C010', 15),
-    ('Marcellus', 'Blk 3, 11-23 Sengkang Eaat Avenue, #03-103', '86789112', 'marcellus@gmail.com', 'C011', 7),
-    ('Melson', 'Blk 9A, 9A - 23D Bartley Road, #04-110', '87891123', 'melson@gmail.com', 'C012', 10),
-    ('Nicholas', 'Blk 4, 2 - 6B Simon Lane, #02-100', '88901254', 'nicholas@gmail.com', 'C013', 12),
-    ('Luis', 'Blk 2, 5 Anthony Road, #03-115', '89812345', 'luis@gmail.com', 'C014', 11),
-    ('Edric', 'Blk 5, 180 Depot Road, #06-130', '81023356', 'edric@gmail.com', 'C015', 8),
+	('Tom Holland', 'Blk 1, 1 Lorong 20 Geylang, #05-118', '84567890', 'tom.holland@gmail.com', 'C003', 'S006'),
+	('Bruno Mars', 'Blk 1, 50 - 76 Punggol Walk, #05-120', '87890123', 'bruno.mars@gmail.com', 'C004', 'S009'),
+	('Fandi Ahmed', 'Blk 2, 7 Bishan Street 15, #05-118', '88901234', 'fandi.ahmed@gmail.com', 'C005', 'S012'),
+	('Iqball', 'Blk 3, 8 Kitchener Link, #06-133', '82134567', 'iqball@gmail.com', 'C006', 'S013'),
+	('Elysaa', 'Blk 7, 116-122 Serangoon Aveneue 3, #02-100', '83245678', 'elysaa@gmail.com', 'C007', 'S015'),
+	('Keefe Chua', 'Blk 5, 21 McCallum Street, #05-120', '81224567', 'keefe.chua@gmail.com', 'C008', 'S015'),
+    ('Eugene', 'Blk 5, Hougnag Avenue 6, #05-118', '83456889', 'eugene@gmail.com', 'C009', 'S006'),
+    ('Marcus', 'Blk 2, 28 Beach Road, #06-128', '85678902', 'marcus@gmail.com', 'C010', 'S007'),
+    ('Marcellus', 'Blk 3, 11-23 Sengkang Eaat Avenue, #03-103', '86789112', 'marcellus@gmail.com', 'C011', 'S009'),
+    ('Melson', 'Blk 9A, 9A - 23D Bartley Road, #04-110', '87891123', 'melson@gmail.com', 'C012', 'S002'),
+    ('Nicholas', 'Blk 4, 2 - 6B Simon Lane, #02-100', '88901254', 'nicholas@gmail.com', 'C013', 'S003'),
+    ('Luis', 'Blk 2, 5 Anthony Road, #03-115', '89812345', 'luis@gmail.com', 'C014', 'S010'),
+    ('Edric', 'Blk 5, 180 Depot Road, #06-130', '81023356', 'edric@gmail.com', 'C015', 'S008'),
 	--CondoMgmt --> (32,33,34,35,36,37,38,39,40,41)
 	--Condo1 --> 32
 	--Condo2 --> 33
@@ -499,17 +493,26 @@ create table TempVehLabel
 	--Condo8 --> 39
 	--Condo9 --> 40
 	--Condo10 --> 41
-	('HorizonBloom', 'King Albert Park 1', '87624321', 'horizonbloom@example.com','C001',9),
-	('SunRiseTech', 'Raffles Quay 45', '91234597', 'sunrise.tech@example.com','C002',3),
-	('ClearView Innovations', 'Bukit Timah Road 22', '82345671', 'clearview.innov@example.com','C003',2),
-	('StarLink Co.', 'Clarke Quay 78', '98165432', 'starlink@example.com','C004',12),
-	('SkyGrove Enterprises', 'Marina Bay Sands 15', '87154321', 'skygrove.ent@example.com','C005',13),
-	('SeaScape Solutions', 'East Coast Road 50', '82456789', 'seascape.sol@example.com','C006',11),
-	('FreshHarbor Ventures', 'Jurong West Street 18', '89012345', 'fresh.harbor@example.com','C007',5),
-	('BlueWave Industries', 'Yishun Avenue 2', '89654321', 'bluewave.ind@example.com','C008',8),
-	('PurePulse Technologies', 'Serangoon Central 31', '91234567', 'purepulse.tech@example.com','C009',9),
-	('EchoView Industries', 'Chinatown Point 40', '98865432', 'echoview@example.com','C010',6);
-	SELECT * FROM Account;
+	--Condo11 --> 42
+	--Condo12 --> 43
+	--Condo13 --> 44
+	--Condo14 --> 45
+	--Condo15 --> 46
+	('HorizonBloom', 'King Albert Park 1', '87624321', 'horizonbloom@gmail.com','C001','S008'),
+	('SunRiseTech', 'Raffles Quay 45', '91234597', 'sunrise.tech@gmail.com','C002','S009'),
+	('ClearView Innovations', 'Bukit Timah Road 22', '82345671', 'clearview.innov@gmail.com','C003','S004'),
+	('StarLink Co.', 'Clarke Quay 78', '98165432', 'starlink@gmail.com','C004','S015'),
+	('SkyGrove Enterprises', 'Marina Bay Sands 15', '87154321', 'skygrove.ent@gmail.com','C005','S011'),
+	('SeaScape Solutions', 'East Coast Road 50', '82456789', 'seascape.sol@gmail.com','C006','S008'),
+	('FreshHarbor Ventures', 'Jurong West Street 18', '89012345', 'fresh.harbor@gmail.com','C007','S010'),
+	('BlueWave Industries', 'Yishun Avenue 2', '89654321', 'bluewave.ind@gmail.com','C008','S001'),
+	('PurePulse Technologies', 'Serangoon Central 31', '91234567', 'purepulse.tech@gmail.com','C009','S005'),
+	('EchoView Industries', 'Chinatown Point 40', '98865432', 'echoview@gmail.com','C010','S003'),
+	('Edifice', 'Central Clark Quay', '97981327', 'Edifice@gmail.com','C011','S009'),
+	('Siemens', '1020 Robbins Road', '98000111', 'siemens@gmail.com','C012','S006'),
+	('Brightview', '5 Shenton Way', '81118765', 'Brightview@gmail.com','C013','S007'),
+	('Milliot & Co', ' 63 Chulia Street', '99990000', 'milliotco@gmail.com','C014','S010'),
+	('Wellington', '21 Collyer Quay', '98980667', 'Wellington@gmail.com','C015','S009');
 
 --8.CondoMgmt
 	INSERT INTO CondoMgmt (CondoMgmtID, ContactPerson, CtcPersonMobile)
@@ -523,29 +526,35 @@ create table TempVehLabel
 	(38, 'Fu Zheng Yi', '82109876'),
 	(39, 'Elon Mask', '81098765'),
 	(40, 'Logan Paul', '89987654'),
-	(41, 'Paul Walker', '98876543');
-	Select * from CondoMgmt;
+	(41, 'Paul Walker', '98876543'),
+	(42, 'Samuel', '88881111'),
+	(43, 'Anirudh', '97974532'),
+	(44, 'Andy', '98176543'),
+	(45, 'Jackson', '91876543'),
+	(46, 'Sowmyah', '93876543');
 
 --9.Owner
 	Insert Into Owner (OwnerID, OwnStartDate, CheckedBy)
 	Values
 	-- Even AccId are Owenrs
+	-- Condo 1 (ONLY APPROVED  by CondoMgmt 32)
 	(2, '2022-01-01', 32),
 	(4, '2022-02-15', 32),
-	(6, '2022-02-10', 33),
+	(6, '2022-02-10', 32),
 	(8, '2022-04-22', null),
-	(10, '2022-04-05', 35),
-	(12, '2022-06-18', 36),
-	(14, '2022-07-02', 36),
-	(16, '2022-06-14', 36),
+	-- Condo 2 (ONLY APPROVED  by CondoMgmt 33)
+	(10, '2022-04-05', 33),
+	(12, '2022-06-18', 33),
+	(14, '2022-07-02', 33),
+	(16, '2022-06-14', 33),
 	(18, '2022-08-28', null),
-	(20, '2022-10-11', 38),
-	(22, '2022-11-24', 39),
+	-- Condo 3-15 (rest odd number CondoMgmt)
+	(20, '2022-10-11', 35),
+	(22, '2022-11-24', 37),
 	(24, '2022-12-07', 39),
-	(26, '2022-02-20', 40),
-	(28, '2022-03-03', 41),
-	(30, '2023-07-17', null);
-	Select * from Owner;
+	(26, '2022-02-20', 41),
+	(28, '2022-03-03', 43),
+	(30, '2023-07-17', 45);
 
 --10.Announcement
 	Insert into Announcement (AnnID, AnnText, AnnStartDate, AnnEndDate, CondoMgmID)
@@ -565,7 +574,6 @@ create table TempVehLabel
 	('A013', 'Reminder: Pay your monthly dues by end of the week.', '2024-03-28', '2024-03-31', 39),
 	('A014', 'Community garden project meeting next Saturday.', '2024-03-30', '2024-04-01', 40),
 	('A015', 'Update: Elevator maintenance on Tuesday.', '2024-02-05', '2024-02-06', 41);
-	Select * from Announcement;
 
 --11.Facility
 	INSERT INTO Facility (FacID, FacName, Deposit, CondoID)
@@ -610,7 +618,6 @@ create table TempVehLabel
 	--Condo 9--
 	('F1C9', 'Function Room', 50.00, 'C009'),
 	('F2C9', 'Children Playground', NULL, 'C009');
-SELECT * From Facility;
 
 --12. FacTimeSlot
 INSERT INTO FacTimeSlot (FacID, TimeSlotSN, SlotDesc)
@@ -737,7 +744,6 @@ VALUES
 ('F2C9', 1, 'Morning Slot: 6 AM to 12 PM'),
 ('F2C9', 2, 'Afternoon Slot: 12 PM to 6 PM'),
 ('F2C9', 3, 'Evening Slot: 6 PM to 12 AM');
-Select * from FacTimeSlot
 
 --13.BookSlot
 INSERT INTO BookSlot(FacID, TimeSlotSN, SlotDate, SlotStatus)
@@ -858,32 +864,31 @@ VALUES
 ('F1C9', 3, '2023-09-20', 'B'),
 ('F2C9', 1, '2023-09-19', 'A'),
 ('F2C9', 2, '2023-09-19', 'B'),
-('F2C9', 3, '2023-09-19', 'M')
-select * from BookSlot
+('F2C9', 3, '2023-09-19', 'M');
 
 --14.Booking
-INSERT INTO Booking (BookingID, BookingDate, BookingStatus, AccID, FacID, TimeSlotSn, SlotDate)
-VALUES
--- Account(1-9 in Condo 1 booked for facilty that are available in condo 1)
--- Swimmig pool booked mostly one day before booking
-('B1C001', '2023-09-18', 'PP', 1, 'F1C1', 1, '2023-09-20'),
-('B3C001', '2023-09-19', 'CF', 5, 'F1C1', 3, '2023-09-20'),
---Gym mostly booked one day before booking.
-('B4C001', '2023-10-17', 'PP', 1, 'F2C1', 1, '2023-10-19'),
-('B5C001', '2023-10-18', 'CC', 2, 'F2C1', 2, '2023-10-19'),
-('B6C001', '2023-10-16', 'PP', 4, 'F2C1', 3, '2023-10-19'),
---BBQ Pit Area booked 1 week ago before booking
-('B7C001', '2023-11-11', 'CF', 7, 'F3C1', 1, '2023-11-18'),
-('B8C001', '2023-11-10', 'PP', 9, 'F3C1', 2, '2023-11-18'),
-('B9C001', '2023-11-09', 'CF', 1, 'F3C1', 3, '2023-11-18'),
---Tennis Court mostly booked two day before booking.
-('B10C001', '2023-09-15', 'PP', 2, 'F4C1', 1, '2023-09-17'),
-('B11C001', '2023-09-16', 'CF', 8, 'F4C1', 2, '2023-09-17'),
-('B12C001', '2023-09-14', 'CC', 6, 'F4C1', 3, '2023-09-17'),
---Function room mostly booked one month before booking.
-('B13C001', '2023-09-11', 'PP', 4, 'F5C1', 1, '2023-10-16'),
-('B14C001', '2023-09-15', 'CF', 3, 'F5C1', 2, '2023-10-16'),
-('B15C001', '2023-09-10', 'PP', 5, 'F5C1', 3, '2023-10-16'),
+	INSERT INTO Booking (BookingID, BookingDate, BookingStatus, AccID, FacID, TimeSlotSn, SlotDate)
+	VALUES
+	-- Account(1-9 in Condo 1 booked for facilty that are available in condo 1)
+	-- Swimmig pool booked mostly one day before booking
+	('B1C001', '2023-09-18', 'PP', 1, 'F1C1', 1, '2023-09-20'),
+	('B3C001', '2023-09-19', 'CF', 5, 'F1C1', 3, '2023-09-20'),
+	--Gym mostly booked one day before booking.
+	('B4C001', '2023-10-17', 'PP', 1, 'F2C1', 1, '2023-10-19'),
+	('B5C001', '2023-10-18', 'CC', 2, 'F2C1', 2, '2023-10-19'),
+	('B6C001', '2023-10-16', 'PP', 4, 'F2C1', 3, '2023-10-19'),
+	--BBQ Pit Area booked 1 week ago before booking
+	('B7C001', '2023-11-11', 'CF', 7, 'F3C1', 1, '2023-11-18'),
+	('B8C001', '2023-11-10', 'PP', 9, 'F3C1', 2, '2023-11-18'),
+	('B9C001', '2023-11-09', 'CF', 1, 'F3C1', 3, '2023-11-18'),
+	--Tennis Court mostly booked two day before booking.
+	('B10C001', '2023-09-15', 'PP', 2, 'F4C1', 1, '2023-09-17'),
+	('B11C001', '2023-09-16', 'CF', 8, 'F4C1', 2, '2023-09-17'),
+	('B12C001', '2023-09-14', 'CC', 6, 'F4C1', 3, '2023-09-17'),
+	--Function room mostly booked one month before booking.
+	('B13C001', '2023-09-11', 'PP', 4, 'F5C1', 1, '2023-10-16'),
+	('B14C001', '2023-09-15', 'CF', 3, 'F5C1', 2, '2023-10-16'),
+	('B15C001', '2023-09-10', 'PP', 5, 'F5C1', 3, '2023-10-16'),
 
 -- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
 -- Swimmig pool booked mostly one day before booking
@@ -907,22 +912,19 @@ VALUES
 ('B15C002', '2023-11-17', 'CF', 15, 'F5C2', 3, '2023-12-16');
 -- Account(10-18 in Condo 2 booked for facilty that are available in condo 2)
 
-Select * from Booking;
-
 --15. Feedback
 INSERT INTO Feedback (FbkID, FbkDesc, FbkDateTime, FbkStatus, ByAccID, FbkCatID, CondoMgmID)
 VALUES
 ('FBK001', 'The hallway on the 3rd floor is not properly cleaned.', '2023-03-01 10:00:00', 'S', 5, 'FC001', Null),
-('FBK002', 'The security gate is malfunctioning frequently.', '2023-03-02 15:30:00', 'A', 12, 'FC002', 32),
+('FBK002', 'The security gate is malfunctioning frequently.', '2023-03-02 15:30:00', 'A', 12, 'FC002', 33),
 ('FBK003', 'Leaky faucet in the community gym restroom.', '2023-03-03 09:00:00', 'S', 7, 'FC003', NULL),
 ('FBK004', 'Cracks observed on the sidewall of building B.', '2023-03-04 14:20:00', 'P', 15, 'FC004', 33),
 ('FBK005', 'Parking lot line markings are faded and need repainting.', '2023-03-05 13:00:00', 'S', 20, 'FC005', NULL),
-('FBK006', 'Loud music from apartment 5B during late-night hours.', '2023-03-06 22:00:00', 'A', 9, 'FC006', 34),
+('FBK006', 'Loud music from apartment 5B during late-night hours.', '2023-03-06 22:00:00', 'A', 9, 'FC006', 32),
 ('FBK007', 'Broken equipment in the fitness center.', '2023-03-07 16:45:00', 'S', 18, 'FC007', Null),
-('FBK008', 'Littering around the community playground.', '2023-03-08 11:30:00', 'A', 22, 'FC001', 35),
+('FBK008', 'Littering around the community playground.', '2023-03-08 11:30:00', 'A', 22, 'FC001', 37),
 ('FBK009', 'Elevator doors closing too quickly, posing a safety hazard.', '2023-03-09 17:15:00', 'S', 25, 'FC008', Null),
-('FBK010', 'Inadequate lighting in the rear parking area.', '2023-03-10 20:50:00', 'P', 30, 'FC005', 37);
-Select * from Feedback
+('FBK010', 'Inadequate lighting in the rear parking area.', '2023-03-10 20:50:00', 'P', 30, 'FC005', 45);
 
 --16. Message
 INSERT INTO Message (MsgID, Msgtext, Msgtype, PostedBy, ReplyTo)
@@ -962,9 +964,6 @@ VALUES
 ('MSG00018', 'Cute pearl necklace for sale', 'G', 30, NULL),
 --Reply04--
 ('MSG00019', 'Have you booked the tennis court?', 'F', 16, 'MSG00009');
-
-
-Select * from Message
 
 --17. ItemPhoto
 INSERT INTO ItemPhoto (ItemID, Photo)
@@ -1010,9 +1009,7 @@ VALUES
 ('MSG00015', 'Photo 1'),
 ('MSG00016', 'Photo 1'),
 ('MSG00017', 'Photo 1'),
-('MSG00018', 'Photo 1')
-
-select * from ItemPhoto;
+('MSG00018', 'Photo 1');
 
 --18. ItemRelated
 INSERT INTO ItemRelated (ItemID, ItemDesc, ItemPrice, ItemStatus,SaleOrRent, ItemCatID)
@@ -1027,8 +1024,7 @@ VALUES
 ('MSG00015', 'Dyson Airwrap: Got it from my ex, never used', '$700', 'Available', 'Sale', 'IC004'),
 ('MSG00016', 'Biology STPM: Overused', '$3', 'Sold', 'Sale', 'IC007'),
 ('MSG00017', 'Iphone 3gs: Doesnt power on, good as a decorative piece', '$60', 'Available', 'Sale', 'IC004'),
-('MSG00018', 'Pearl necklace: About 5mm in length', '$5', 'Sold', 'Sale', 'IC002')
-
+('MSG00018', 'Pearl necklace: About 5mm in length', '$5', 'Sold', 'Sale', 'IC002');
 
 --19. Likes
 INSERT INTO Likes (AccID, MessageID)
@@ -1045,31 +1041,30 @@ VALUES
 (28, 'MSG00009'),
 (29, 'MSG00009'),
 (30, 'MSG00010'),
-(32, 'MSG00010')
-select * from Likes
+(31, 'MSG00010');
 
 --20. Tenant
 INSERT INTO Tenant (TenantID, ContactStartDate, ContactEndDate, VerifiedBy)
 VALUES
---Tenant ID Condo 1(Odd numbers of Account ID ---> (1,3,5,7,9)
+--Tenant ID Condo 1(Odd numbers of Account ID ---> (1,3,5,7,9) Aprroved by ONLY CondoMgmt 32
 (1, '2023-1-10', '2027-3-10', 32),
-(3, '2023-2-10', '2027-2-10', 33),
-(5, '2023-3-10', '2027-1-10', 34),
+(3, '2023-2-10', '2027-2-10', 32),
+(5, '2023-3-10', '2027-1-10', 32),
 (7, '2023-4-10', '2026-12-10', null),
-(9, '2023-5-10', '2026-11-10', 36),
---Tenant ID Condo 2(Odd numbers of Account ID ---> (11,13,15,17)
-(11, '2023-6-10', '2026-10-10', 37),
-(13, '2023-7-10', '2026-9-10', 37),
+(9, '2023-5-10', '2026-11-10', 32),
+--Tenant ID Condo 2(Odd numbers of Account ID ---> (11,13,15,17) Aprroved by ONLY CondoMgmt 33
+(11, '2023-6-10', '2026-10-10', 33),
+(13, '2023-7-10', '2026-9-10', 33),
 (15, '2023-8-10', '2026-8-10', null),
-(17, '2023-9-10', '2026-7-10', 37),
+(17, '2023-9-10', '2026-7-10', 33),
 (19, '2023-10-10', '2026-6-10', null),
-(21, '2023-11-10', '2026-5-10', 38),
-(23, '2023-12-10', '2026-4-10', 38),
-(25, '2024-1-10', '2026-3-10', 39),
-(27, '2024-2-10', '2026-2-10', 40),
-(29, '2023-3-10', '2026-1-10', 41)
-select * from Tenant
-
+--Aprroved by ONLY even numbers of  CondoMgmt 
+(21, '2023-11-10', '2026-5-10', 34),
+(23, '2023-12-10', '2026-4-10', 36),
+(25, '2024-1-10', '2026-3-10', 40),
+(27, '2024-2-10', '2026-2-10', 42),
+(29, '2023-3-10', '2026-1-10', 44),
+(31, '2023-4-10', '2026-1-10', 46);
 --21. UsefulContact
 INSERT INTO UsefulContact (UsefulCtcID, UsefulCtcName, UsefulCtcDesc, UsefulCtcPhone, CtcCatId)
 VALUES
@@ -1094,8 +1089,6 @@ VALUES
 ('UC00019', 'Zhi En',		'Dental',			'12344321', 'CC001'),
 ('UC00020', 'Zack',			'Food',				'56788765', 'CC002');
 
-SELECT * FROM UsefulContact;
-
 --22. CondoUseFulContact
 INSERT INTO CondoUsefulContact (CondoId, UsefulCtcID)
 VALUES
@@ -1118,28 +1111,27 @@ VALUES
 ('C002', 'UC00017'),
 ('C003', 'UC00018'),
 ('C004', 'UC00019'),
-('C005', 'UC00020')
-select * from CondoUsefulContact
+('C005', 'UC00020');
 
 --23. VehicleLabel
 INSERT INTO VehicleLabel (VehLblAppID, VehLblStatus, VehLblNum, VehicleNo, AppliedBy, IssuedBy)
 VALUES
-('VL00001', 'A', 'VN00001', 'V00001', 15, 34),
-('VL00002', 'A', 'VN00002', 'V00012', 15, 34),	
-('VL00003', 'R', 'VN00003', 'V00009', 11, 32),	
-('VL00004', 'A', 'VN00004', 'V00002', 9, 36),
-('VL00005', 'A', 'VN00005', 'V00006', 2, 35),	
-('VL00006', 'A', 'VN00006', 'V00014', 7, 40),	
+('VL00001', 'A', 'VN00001', 'V00001', 15, 33),
+('VL00002', 'A', 'VN00002', 'V00012', 15, 33),	
+('VL00003', 'P', 'VN00003', 'V00009', 11, NULL),	
+('VL00004', 'A', 'VN00004', 'V00002', 9, 32),
+('VL00005', 'A', 'VN00005', 'V00006', 2, 32),	
+('VL00006', 'A', 'VN00006', 'V00014', 7, 32),	
 ('VL00007', 'P', 'VN00007', 'V00004', 8, null),	
-('VL00008', 'R', 'VN00008', 'V00010', 22, 38),	
+('VL00008', 'R', 'VN00008', 'V00010', 22, 37),	
 ('VL00009', 'P', 'VN00009', 'V00003', 17, null),	
-('VL00010', 'A', 'VN00010', 'V00009', 21, 37),	
+('VL00010', 'A', 'VN00010', 'V00009', 21, 36),	
 ('VL00011', 'P', 'VN00011', 'V00005', 12, null),	
-('VL00012', 'A', 'VN00012', 'V00017', 23, 36),	
-('VL00013', 'A', 'VN00013', 'V00013', 27, 40),	
-('VL00014', 'A', 'VN00014', 'V00010', 18, 39),	
-('VL00015', 'A', 'VN00015', 'V00018', 12, 36),	
-('VL00016', 'A', 'VN00016', 'V00013', 5, 33)	
+('VL00012', 'A', 'VN00012', 'V00017', 23, 38),	
+('VL00013', 'P', 'VN00013', 'V00013', 27, NULL),	
+('VL00014', 'A', 'VN00014', 'V00010', 18, 33),	
+('VL00015', 'P', 'VN00015', 'V00018', 12, NULL),	
+('VL00016', 'A', 'VN00016', 'V00013', 5, 32);
 
 --24. TempVehLabel
 INSERT INTO TempVehLabel (VehLblAppID, TempStartDate, TempExpiryDate)
@@ -1183,11 +1175,11 @@ Table with foreign key
 16.	Message
 17.	ItemPhoto
 18.	ItemRelated
-19.	Likes
+19.	LikesTddd
 20.	Tenant
 21.	UsefulContact
 22.	CondoUsefulContact
-23.	VehicleLabel
+23.	VehicleLabelCF' 
 24.	TempVehLabel
 
 Notes:  Last 10 of account is condomgmt
@@ -1195,3 +1187,30 @@ Notes:  Last 10 of account is condomgmt
 
 */
 ---------------STOP HERE-----------------------------------------
+
+SELECT * FROM Account;
+SELECT * FROM Announcement;
+SELECT * FROM Booking;
+SELECT * FROM BookSlot;
+SELECT * FROM Condo;
+SELECT * FROM CondoMgmt;
+SELECT * FROM CondoUsefulContact;
+SELECT * FROM ContactCat;
+SELECT * FROM Facility;
+SELECT * FROM FacTimeSlot;
+SELECT * FROM Feedback;
+SELECT * FROM FeedbkCat;
+SELECT * FROM ItemCategory;
+SELECT * FROM Message;
+SELECT * FROM ItemPhoto;
+SELECT * FROM ItemRelated;
+SELECT * FROM Likes;
+SELECT * FROM Owner;
+SELECT * FROM Staff;
+SELECT * FROM TempVehLabel;
+SELECT * FROM Tenant;
+SELECT * FROM UsefulContact;
+SELECT * FROM Vehicle;
+SELECT * FROM VehicleLabel;
+
+
