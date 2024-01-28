@@ -1,5 +1,6 @@
-CREATE DATABASE MyCondo;
+CREATE DATABASE MyCondoFinal;
 --1. (Table 5)
+
 create table Condo
 (
 	CondoID	char(10)		not null,
@@ -991,40 +992,19 @@ VALUES
 --17. ItemPhoto
 INSERT INTO ItemPhoto (ItemID, Photo)
 VALUES
---	Photos for Message 1
-('MSG00001', 'Photo 1'),
-('MSG00001', 'Photo 2'),
-('MSG00001', 'Photo 3'),
 --	Photos for Message 2
 ('MSG00002', 'Photo 1'),
 ('MSG00002', 'Photo 2'),
 ('MSG00002', 'Photo 3'),
-
---	Photos for Message 4
-('MSG00004', 'Photo 1'),
-('MSG00004', 'Photo 2'),
-('MSG00004', 'Photo 3'),
---	Photos for Message 5
-('MSG00005', 'Photo 1'),
-('MSG00005', 'Photo 2'),
-('MSG00005', 'Photo 3'),
 --	Photos for Message 6
 ('MSG00006', 'Photo 1'),
 ('MSG00006', 'Photo 2'),
 ('MSG00006', 'Photo 3'),
---	Photos for Message 8
-('MSG00008', 'Photo 1'),
-('MSG00008', 'Photo 2'),
-('MSG00008', 'Photo 3'),
---	Photos for Message 9
-('MSG00009', 'Photo 1'),
-('MSG00009', 'Photo 2'),
-('MSG00009', 'Photo 3'),
 --	Photos for Message 10
 ('MSG00010', 'Photo 1'),
 ('MSG00010', 'Photo 2'),
 ('MSG00010', 'Photo 3'),
--- Photos for Message 11 - 19
+-- Photos for Message 11 - 18
 ('MSG00011', 'Photo 1'),
 ('MSG00012', 'Photo 1'),
 ('MSG00013', 'Photo 1'),
@@ -1052,18 +1032,17 @@ VALUES
 INSERT INTO Likes (AccID, MessageID)
 VALUES
 (1, 'MSG00001'),
-(4, 'MSG00002'),
-(7, 'MSG00002'),
-(9, 'MSG00003'),
+(13, 'MSG00002'),
+(15, 'MSG00002'),
+(11, 'MSG00003'),
 (11, 'MSG00006'),
 (14, 'MSG00006'),
-(20, 'MSG00007'),
-(25, 'MSG00007'),
-(23, 'MSG00008'),
-(28, 'MSG00009'),
-(29, 'MSG00009'),
-(30, 'MSG00010'),
-(31, 'MSG00010');
+(1, 'MSG00007'),
+(5, 'MSG00007'),
+(3, 'MSG00008'),
+(17, 'MSG00009'),
+(15, 'MSG00009');
+
 
 --20. Tenant
 INSERT INTO Tenant (TenantID, ContactStartDate, ContactEndDate, VerifiedBy)
